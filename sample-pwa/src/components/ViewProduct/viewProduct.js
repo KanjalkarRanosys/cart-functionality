@@ -1,11 +1,12 @@
 import { useQuery, gql, useMutation } from '@apollo/client'
 import { CartTriggerFragment } from '@magento/peregrine/lib/talons/Header/cartTriggerFragments.gql'
+import { MiniCartFragment } from '@magento/peregrine/lib/talons/MiniCart/miniCartFragments.gql'
 import { element } from 'prop-types'
 import React from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { MiniCartFragment, MINI_CART_QUERY } from '../MiniCart/miniCart.gql'
+// import { MiniCartFragment, MINI_CART_QUERY } from '../MiniCart/miniCart.gql'
 
 const VIEW_PRODUCT = gql`
 query getProductDetailForProductPage($urlKey:String!){
@@ -136,7 +137,7 @@ const ViewProduct = () => {
                     <div style={{display:"flex", justifyContent:"space-between"}}>
                                     <div>Fashion Size</div>
                         {el.configurable_options.map((element)=>(
-                            element.values[0].map((item)=>(
+                            element.values.map((item)=>(
                                 <div>
                                     {(selectedSize == item.uid) ? 
                                     <button 

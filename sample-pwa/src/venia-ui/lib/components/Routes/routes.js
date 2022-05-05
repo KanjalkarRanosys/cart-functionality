@@ -5,9 +5,12 @@ import { useScrollTopOnChange } from '@magento/peregrine/lib/hooks/useScrollTopO
 import { fullPageLoadingIndicator } from '../LoadingIndicator';
 import HomePage from '../HomePage';
 import MagentoRoute from '../MagentoRoute';
-import ProductList from '../ProductList/productList';
-import ViewProduct from '../ViewProduct/viewProduct';
-import ShoppingCart from '../ShoppingCart/shoppingCart';
+// import ProductList from '../ProductList/productList';
+// import ViewProduct from '../ViewProduct/viewProduct';
+// import ShoppingCart from '../ShoppingCart/shoppingCart';
+import ProductList from '../../../../components/ProductList/productList';
+import ViewProduct from '../../../../components/ViewProduct/viewProduct';
+import ShoppingCart from '../../../../components/ShoppingCart/shoppingCart';
 
 const Routes = () => {
     const { pathname } = useLocation();

@@ -6,8 +6,10 @@ import { useStyle } from '../../classify';
 import Footer from '../Footer';
 import Header from '../Header';
 import defaultClasses from './main.module.css';
-import CustomHeader from '../customHeader/customHeader';
-import CustomFooter from '../CustomFooter/customFooter';
+// import CustomHeader from '../customHeader/customHeader';
+// import CustomFooter from '../CustomFooter/customFooter';
+import CustomHeader from '../../../../components/customHeader/customHeader';
+import CustomFooter from '../../../../components/CustomFooter/customFooter';
 
 const Main = props => {
     const { children, isMasked } = props;

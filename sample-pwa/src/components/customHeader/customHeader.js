@@ -1,8 +1,8 @@
 import { useQuery, gql } from '@apollo/client'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-// import ProductList from '../ProductList/productList'
+import { Link, Route } from 'react-router-dom'
+import ProductList from '../ProductList/productList'
 // import Routes from '../Routes'
 
 const GET_CART_COUNT = gql`
