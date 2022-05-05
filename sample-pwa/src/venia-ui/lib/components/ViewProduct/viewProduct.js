@@ -86,11 +86,11 @@ const ViewProduct = () => {
     const cartId = storeDetails.cart.cartId
     const [confi,setConfi] = useState([])
 
-    const itemValues = data.products && data.products.items.map((el) => (
+    const itemValues = data && data.products && data.products.items.map((el) => (
         el.configurable_options && el.configurable_options.map((el4) => el4.uid )
     ))
 
-    const skuGet = data.products.items.map((el)=> (
+    const skuGet = data && data.products && data.products.items.map((el)=> (
         el.sku
     ))
 
@@ -106,7 +106,7 @@ const ViewProduct = () => {
     console.log(skuValue);
     // console.log(selectedOptionsGet);
 
-    const configurable_options = itemValues.map((e)=> e)
+    const configurable_options = itemValues && itemValues.map((e)=> e)
 
     console.log(configurable_options);
 
@@ -116,7 +116,7 @@ const ViewProduct = () => {
             "cartId":cartId,
             cartItem: {
                 quantity: quantity,
-                selected_options: ['Y29uZmlndXJhYmxlLzU0MC8xMDU=', 'Y29uZmlndXJhYmxlLzU3My8xMzI='],
+                selected_options: selected_options,
                 sku: skuValue
             }
         }
@@ -126,7 +126,7 @@ const ViewProduct = () => {
 
   return (
     <div>
-        {data &&
+        {data && data.products &&
             data.products.items.map((el)=> (
                 <div style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
                     
@@ -143,7 +143,7 @@ const ViewProduct = () => {
                                         style={{padding:"15px", color:"#fff", background:"rgb(169 169 181)", margin:"2px"}}
                                         onClick={()=>{
                                             setSelectedSize(item.uid),
-                                            setSelectedOptions(item.uid)
+                                            setSelectedOptions([...selected_options, item.uid])
                                         }}
                                         >
                                             {item.label}
@@ -153,7 +153,7 @@ const ViewProduct = () => {
                                         onClick={()=>
                                             {
                                                 setSelectedSize(item.uid),
-                                                setSelectedOptions(item.uid)
+                                                setSelectedOptions([...selected_options, item.uid])
                                             }
                                         }
                                         >
