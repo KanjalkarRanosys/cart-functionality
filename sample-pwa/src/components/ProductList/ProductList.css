@@ -1,0 +1,30 @@
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #ebebeb;
+}
+
+.row-product {
+    list-style: none;
+    flex-basis: 0 0 33.33333%;
+    width: 33.3333%;
+    padding: 30px;
+}
+
+.row-product-img {
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.add-button {
+    background-color: #69a388;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+.detail-text {
+    color: #000;
+    font-size: 16px;
+    padding: 5px 0px;
+}

@@ -1,0 +1,40 @@
+.shipping {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 30px;
+    font-family: 'Noto Sans';
+    justify-content: space-around;
+}
+
+.shipping-form {
+    padding: 30px 40px;
+    margin-top: 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: rgb(231, 237, 245);
+}
+
+.shipping-form-one-row {
+    display: flex;
+}
+
+.shipping-input {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin: 0 5px;
+    margin-top: 20px;
+}
+
+.shipping-form input {
+    border: 1px solid #000;
+    height: 30px;
+    border-radius: 5px;
+    margin-top: 4px;
+    outline: none;
+}
+
+.shipping-heading {
+    display: flex;
+    justify-content: center;
+}

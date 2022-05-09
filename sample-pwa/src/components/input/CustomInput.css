@@ -1,0 +1,16 @@
+
+.shipping-input {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin: 0 5px;
+    margin-top: 20px;
+}
+
+.shipping-form input {
+    border: 1px solid #000;
+    height: 30px;
+    border-radius: 5px;
+    margin-top: 4px;
+    outline: none;
+}

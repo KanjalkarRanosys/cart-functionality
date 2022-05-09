@@ -1,0 +1,29 @@
+
+.custom-header {
+    display: flex;
+    background-color: #fff;
+    justify-content: space-between;
+    height: 70px;
+    align-items: center;
+    border-bottom: 1px solid #000;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 0 20px;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+}
+
+.home-button {
+    width: 30%;
+}
+
+.cart-button {
+    width: 40%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+/* .signin-header {
+    display: flex;
+    flex-direction: row-reverse;
+} */

@@ -1,0 +1,45 @@
+.sign-in {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 60px;
+    /* background-color: antiquewhite;
+    min-height: 70vh !important; */
+}
+
+.sign-in-input {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.sign-in-input input {
+    border: 1px solid #000;
+    height: 30px;
+    border-radius: 5px;
+    margin-top: 4px;
+    outline: none;
+}
+
+.sign-in-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 40px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: rgb(231, 237, 245);
+}
+
+.sign-in-button {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.sign-in-button button {
+    border: 1px solid gray;
+    padding: 10px 25px;
+    border-radius: 5px;
+    background-color: rgb(92, 71, 185);
+    color: #fff;
+}

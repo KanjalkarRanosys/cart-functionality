@@ -1,12 +1,41 @@
 import React from 'react'
+import "./CustomFooter.css"
 
 const CustomFooter = () => {
   return (
-    <div style={{display: "flex", justifyContent:"space-around", padding: "10px 40px", height:"200px", background:"rgb(213 213 213)"}}>
-        <button style={{backgroundColor: "gray", padding:"10px 80px", height:"40px", color: "white"}}>About Us</button>
-        <button style={{backgroundColor: "gray", padding:"10px 80px", height:"40px", color: "white"}}>Contact Us</button>
-        <button style={{backgroundColor: "gray", padding:"10px 80px", height:"40px", color: "white"}}>Follow Us</button>
-        <button style={{backgroundColor: "gray", padding:"10px 80px", height:"40px", color: "white"}}>Accoutn</button>
+    <div className='custom-footer'>
+    <div className='divider footer-divider' />
+    <div className='footer-options'>
+      <div>
+        <button>About Us</button>
+        <ul>
+          <li>Our Story</li>
+          <li>Email SignUp</li>
+          <li>Give Back</li>
+        </ul>
+      </div>
+      <div>
+        <button>Contact Us</button>
+        <ul>
+          <li>Customer Service</li>
+          <li>Order Service</li>
+          <li>Return</li>
+        </ul>
+      </div>
+      <div className='follow-us-p'>
+        <button>Follow Us</button>
+          <p>Lorem ipsum dolor sit amet, consectetur adipsicing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+      <div>
+        <button>Account</button>
+        <ul>
+          <li>SignIn</li>
+          <li>Register</li>
+          <li>Order Status</li>
+          <li>Return</li>
+        </ul>
+      </div>
+    </div>
     </div>
   )
 }

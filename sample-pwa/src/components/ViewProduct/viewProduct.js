@@ -6,7 +6,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-// import { MiniCartFragment, MINI_CART_QUERY } from '../MiniCart/miniCart.gql'
+import './ViewProduct.css'
 
 const VIEW_PRODUCT = gql`
 query getProductDetailForProductPage($urlKey:String!){
@@ -61,14 +61,9 @@ const ADD_PRODUCT_TO_CART = gql`
 
 const ViewProduct = () => {
 
-    const dispatch = useDispatch()
-
     const params = useParams()
-    console.log(params);
 
     const urlKey = params.name.replace(/ /g,"-").toLowerCase()
-
-    console.log(urlKey);
 
     const {data} = useQuery(VIEW_PRODUCT, {
         variables: {"urlKey":urlKey}
@@ -77,15 +72,14 @@ const ViewProduct = () => {
     console.log(data);
 
     const [selectedSize, setSelectedSize] = useState(false)
-
+    const [selectedColor, setSelectedColor] = useState(false)
     const [quantity, setQuantity] = useState(1)
     const [sku, setSKU] = useState()
     const [selected_options, setSelectedOptions] = useState([])
-
     const storeDetails = useSelector((state)=> state)
-    console.log(storeDetails);
     const cartId = storeDetails.cart.cartId
-    const [confi,setConfi] = useState([])
+    const [isColor, setIsColor] = useState(false)
+
 
     const itemValues = data && data.products && data.products.items.map((el) => (
         el.configurable_options && el.configurable_options.map((el4) => el4.uid )
@@ -94,22 +88,8 @@ const ViewProduct = () => {
     const skuGet = data && data.products && data.products.items.map((el)=> (
         el.sku
     ))
-
-    // const selectedOptionsGet = data.products.items && data.products.items.configurable_options.map((el)=> (
-    //     el.uid
-    // ))
-
-    // const selectedOptions = selectedOptionsGet+""
-
     const skuValue = skuGet+""
-
-    console.log(itemValues);
-    console.log(skuValue);
-    // console.log(selectedOptionsGet);
-
     const configurable_options = itemValues && itemValues.map((e)=> e)
-
-    console.log(configurable_options);
 
 
     const [addToCart, {loading, error}] = useMutation(ADD_PRODUCT_TO_CART, {
@@ -122,70 +102,151 @@ const ViewProduct = () => {
             }
         }
     })
-    
-    console.log(selected_options);
 
   return (
-    <div>
+    <div className='view-product-details'>
         {data && data.products &&
             data.products.items.map((el)=> (
-                <div style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
-                    
-                    <img src={el.small_image.url} style={{height:"350px", width:"350px"}} />
-                    <span>Price: ${el.price.regularPrice.amount.value}</span>
-                    <div style={{display:"flex", flexDirection:"row", justifyContent:"space-around"}}>
-                    <div style={{display:"flex", justifyContent:"space-between"}}>
-                                    <div>Fashion Size</div>
-                        {el.configurable_options.map((element)=>(
-                            element.values.map((item)=>(
-                                <div>
-                                    {(selectedSize == item.uid) ? 
-                                    <button 
-                                        style={{padding:"15px", color:"#fff", background:"rgb(169 169 181)", margin:"2px"}}
-                                        onClick={()=>{
-                                            setSelectedSize(item.uid),
-                                            setSelectedOptions([...selected_options, item.uid])
-                                        }}
-                                        >
-                                            {item.label}
-                                    </button> : 
-                                    <button 
-                                        style={{padding:"15px", color:"#fff", background:"#2828a1", margin:"2px"}}
-                                        onClick={()=>
-                                            {
-                                                setSelectedSize(item.uid),
-                                                setSelectedOptions([...selected_options, item.uid])
-                                            }
-                                        }
-                                        >
-                                            {item.label}
-                                    </button>
-                                    }
-                                </div>
-                            ))
-                        ))}
-                    </div>
-                    <div style={{display:"flex", alignItems:"center", flexDirection:"column"}}>
-                        <button style={{background:"rgb(169 169 181)", padding:"10px 30px"}}
-                            onClick={()=>{
-                                quantity>0 && setQuantity(quantity-1)}
-                            }
-                        >-</button>
-                            <div>
-                                Quantity: {quantity}
+                <div>
+                    <div className='view-product-detail'>
+                        <img src={el.small_image.url} className="view-img"/>
+                        <div className='view-product-desc'>
+                            <div className='view-detail-heading'>
+                                <span>{el.name}</span>
                             </div>
-                        <button style={{background:"rgb(169 169 181)", padding:"10px 30px"}}
-                            onClick={()=>setQuantity(quantity+1)}
-                        >+</button>
-                    </div>
-                    <button
-                        onClick={()=>addToCart()}
-                    >Add To Cart</button>
+                                <div>Price: ${el.price.regularPrice.amount.value}</div>
+                            <div>
+
+                            {el.configurable_options.map((element)=>(
+                                element.attribute_code == "fashion_color" &&
+                                    <div className='detail-text'>Fashion Color:</div>
+                                    )
+                                )
+                            }
+                                <div className='fashion-size-options'>
+                                    {el.configurable_options.map((element)=>(
+                                        element.attribute_code == "fashion_color" &&
+                                        element.values.map((item)=>(
+                                            <div>
+                                                {(selectedColor == item.uid) ? 
+                                                <button 
+                                                    className='selected-color'
+                                                    style={{background:`${item.swatch_data.value}`}}
+                                                    onClick={()=>{
+                                                        setSelectedColor(item.uid),
+                                                        setSelectedOptions([...selected_options, item.uid])
+                                                    }}
+                                                    >
+                                                        <span className='check'>✔</span>
+                                                </button> : 
+                                                <button 
+                                                className='non-selected-color'
+                                                style={{background:`${item.swatch_data.value}`}}
+                                                    onClick={()=>
+                                                        {
+                                                            setSelectedColor(item.uid),
+                                                            setSelectedOptions([...selected_options, item.uid])
+                                                        }
+                                                    }
+                                                    >
+                                                        {/* {item.label} */}
+                                                </button>
+                                                }
+                                            </div>
+                                        ))
+                                    ))}
+                                </div>
+                            </div>
+                            
+                            <div className='fashion-size'>
+                                            <div className='detail-text' >Fashion Size:</div>
+                                            <div className='fashion-size-options'>
+                                {el.configurable_options.map((element)=>(
+                                    element.attribute_code == "fashion_size" &&
+                                    element.values.map((item)=>(
+                                        <div>
+                                            {(selectedSize == item.uid) ? 
+                                            <button 
+                                                className='selected-size'
+                                                onClick={()=>{
+                                                    setSelectedSize(item.uid),
+                                                    setSelectedOptions([...selected_options, item.uid])
+                                                }}
+                                                >
+                                                    {item.label}
+                                            </button> : 
+                                            <button 
+                                            className='non-selected-size'
+                                                onClick={()=>
+                                                    {
+                                                        setSelectedSize(item.uid),
+                                                        setSelectedOptions([...selected_options, item.uid])
+                                                    }
+                                                }
+                                                >
+                                                    {item.label}
+                                            </button>
+                                            }
+                                        </div>
+                                    ))
+                                ))}
+                                </div>
+                            </div>
+                                <div className='view-product-quantity'>
+
+                                Quantity:
+                                <div className='grp-column'>
+                                    <button
+                                        onClick={()=>{
+                                            quantity>0 && setQuantity(quantity-1)}
+                                        }
+                                    >-</button>
+                                        <div className='quantity-text'>
+                                            {quantity}
+                                        </div>
+                                    <button
+                                        onClick={()=>setQuantity(quantity+1)}
+                                    >+</button>
+                                    </div>
+                                </div>
+                            {/* <div className='divider' /> */}
+                            <button 
+                                disabled={!selectedColor && selectedSize ? true : false} 
+                                className={selectedColor && selectedSize ? "add-button" : "disable-add-button" }
+                                onClick={()=>{selectedColor && selectedSize && addToCart()}}
+                            >Add To Cart</button>
+                            </div>
+                            {/* <div>
+                                {el.media_gallery_entries.map((item)=> (
+                                    item.file
+                                ))}
+                            </div> */}
+                        </div>
+                        <div className='divider' />
+                        <div className='desc-details-features'>
+                            <div className='desc-features'>
+                                <div>
+                                    <div className='details-heading'>DESCRIPTION</div>
+                                    <div className='meta-desc'>{el.meta_description}</div>
+                                </div>
+                                <div>
+                                    <div className='details-heading'>FEATURES</div>
+                                    <div>This is features</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div className='details-heading'>DETAILS</div>
+                                <div>This is details</div>
+                            </div>
+                        </div>
                     </div>
 
-                </div>
+                    // </div>
             ))
+
+
         }
+
     </div>
   )
 }

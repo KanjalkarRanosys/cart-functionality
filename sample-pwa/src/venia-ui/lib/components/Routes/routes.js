@@ -11,6 +11,9 @@ import MagentoRoute from '../MagentoRoute';
 import ProductList from '../../../../components/ProductList/productList';
 import ViewProduct from '../../../../components/ViewProduct/viewProduct';
 import ShoppingCart from '../../../../components/ShoppingCart/shoppingCart';
+import Homepage from '../../../../components/homePage/homepage';
+import SignIn from '../../../../components/SignIn/signIn';
+import ShippingForm from '../../../../components/ShippingForm/shippingForm';
 
 const Routes = () => {
     const { pathname } = useLocation();
@@ -24,6 +27,9 @@ const Routes = () => {
                  * Venia's are defined in packages/venia-ui/lib/targets/venia-ui-intercept.js
                  */}
                  <Route>
+                     <Route exact path="/">
+                         <Homepage />
+                     </Route>
 
                     <Route path="/product-list">
                         <ProductList />
@@ -35,6 +41,14 @@ const Routes = () => {
 
                     <Route path="/shopping-cart">
                         <ShoppingCart />
+                    </Route>
+
+                    <Route path="/sign-in">
+                        <SignIn />
+                    </Route>
+
+                    <Route path="/shipping-form">
+                        <ShippingForm />
                     </Route>
                     
                  </Route>

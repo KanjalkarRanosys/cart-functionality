@@ -1,0 +1,33 @@
+.custom-footer {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    font-family: 'Noto Sans';
+}
+
+.custom-footer button {
+    /* padding: 10px 80px; */
+    height: 40px;
+    font-weight: 700;
+}
+
+.footer-options {
+    display: flex;
+    justify-content: space-around;
+}
+
+.follow-us-p {
+    width: 400px;
+}
+
+.footer-options li {
+    margin: 15px 0;
+}
+
+.footer-options p {
+    line-height: 22px;
+}
+
+.footer-divider {
+    margin-bottom: 30px;
+}

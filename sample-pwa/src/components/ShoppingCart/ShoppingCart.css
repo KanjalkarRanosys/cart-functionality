@@ -1,0 +1,128 @@
+.cart-one-product {
+    display: flex;
+    padding-top: 20px;
+    margin: 20px 0;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.cart {
+    /* padding: 0 40px; */
+    display: flex;
+    /* flex-direction: column; */
+    /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+    padding: 30px 0;
+    font-family: 'Noto Sans';
+}
+
+.cart-heading {
+    display: flex;
+    justify-content: center;
+    /* padding: 30px 0; */
+}
+
+.cart-product-list {
+    width: 60%;
+}
+
+.cart-one-product-desc {
+    padding-left: 50px;
+    display: flex;
+}
+
+.cart-one-product-img {
+    width: 150px;
+    height: 180px;
+    border-radius: 5px;
+    /* border: 1px solid gray; */
+}
+
+.desc-key {
+    font-size: 14px;
+    /* font-weight: 800; */
+}
+
+.cart-quantity-delete {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    justify-content: center;
+}
+
+.cart-quantity {
+    display: flex;
+    align-items: center;
+}
+
+.cart-quantity button {
+    background-color: "rgb(169 169 181)";
+    padding:"10px 30px";
+    border: 1px solid rgb(34, 34, 34);
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.delete-button {
+    padding: 10px;
+    background-color: #dc3545;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.padding-desc {
+    padding: 10px 0;
+}
+
+.cart-total-quantity {
+    /* border: 1px solid rgb(201, 197, 197); */
+    padding: 40px 60px;
+    margin-top: 30px;
+    border-radius: 5px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    width: 60%;
+    height: 130px;
+}
+
+.desc-key {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.cart-price {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.desc-value {
+    /* display: flex; */
+    /* justify-content: space-between; */
+}
+
+.desc-quantity-total {
+    display: flex;
+}
+
+.desc-key {
+    width: 60%;
+}
+
+.checkout-button {
+    /* background-color: steelblue; */
+    margin-top: 30px;
+}
+
+.checkout-button button {
+    padding: 15px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.cart-single-product-quantity {
+    padding: 5px 20px;
+    border: 1px solid #000;
+    border-radius: 4px;
+}

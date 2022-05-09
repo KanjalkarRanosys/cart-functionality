@@ -1,0 +1,39 @@
+.home-banner {
+    border-width: 1px;
+    border-style: none;
+    border-image: initial;
+    border-radius: 0px;
+    background-image: url(https://jnz3dtiuj77ca.dummycachetest.com/media/catalog/category/venia-hero1.jpg?auto=webp&format=pjpg&quality=85);
+    /* background-size: contain;
+    background-position: left top; */
+    background-repeat: no-repeat;
+    min-height: 660px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.home-banner-content {
+    position: absolute;
+    width: 50%;
+    padding-left: 50px;
+}
+
+.home-banner-content-heading {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.home-banner-content-details {
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+.home-banner-button {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    padding: 15px 40px;
+    border-radius: 5px;
+}
