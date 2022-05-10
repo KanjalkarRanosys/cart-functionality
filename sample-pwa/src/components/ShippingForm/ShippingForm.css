@@ -1,9 +1,8 @@
 .shipping {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    /* align-items: center; */
     padding-top: 30px;
-    font-family: 'Noto Sans';
     justify-content: space-around;
 }
 
