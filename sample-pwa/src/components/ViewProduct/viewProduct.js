@@ -218,7 +218,7 @@ const ViewProduct = () => {
                             </div>
                             {/* <div>
                                 {el.media_gallery_entries.map((item)=> (
-                                    item.file
+                                   <img src={item.file} />
                                 ))}
                             </div> */}
                         </div>

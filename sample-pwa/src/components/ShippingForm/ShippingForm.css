@@ -33,7 +33,27 @@
     outline: none;
 }
 
+.shipping-form select {
+    border: 1px solid #000;
+    height: 30px;
+    border-radius: 5px;
+    margin-top: 4px;
+    outline: none;
+    background-color: #fff;
+}
+
 .shipping-heading {
+    display: flex;
+    justify-content: center;
+}
+
+.shipping-button button {
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    padding: 10px 25px;
+    border-radius: 5px;
+    color: #fff;
+    margin-top: 25px;
     display: flex;
     justify-content: center;
 }

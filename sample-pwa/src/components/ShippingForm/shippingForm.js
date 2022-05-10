@@ -1,15 +1,16 @@
-import { useMutation, useQuery } from '@apollo/client'
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import React from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import CustomInput from '../input/customInput'
-import { GUEST_ADDRESS, PRICE_SUMMARY } from '../queries/queries'
+import { GET_REGION, GUEST_ADDRESS, ITEM_COUNT, PRICE_SUMMARY } from '../queries/queries'
 import "./ShippingForm.css"
-
+import countriesData from '../../../addressData/addressData.json'
 
 
 const ShippingForm = () => {
 
+    console.log("countriesData", countriesData);
     const [address, setAddress]= useState({
         city: "",
         country_code: "",
@@ -29,7 +30,9 @@ const ShippingForm = () => {
         "cartId": cartId,
     })
 
-    console.log(address);
+    const itemCount = useQuery(ITEM_COUNT, {
+        "cartId": cartId,
+    })
 
 const subTotal = priceSummary && priceSummary.data && priceSummary.data.cart && priceSummary.data.cart.prices.subtotal_excluding_tax.value
 const total = priceSummary && priceSummary.data && priceSummary.data.cart && priceSummary.data.cart.prices.subtotal_including_tax.value
@@ -46,6 +49,31 @@ const handleSubmit = (e) => {
         }
     })
 }
+
+console.log(useQuery(GET_REGION, {
+    variables: {
+        countryCode : "IN"
+    }
+}));
+
+const [regionData, lazyResults] = useLazyQuery(GET_REGION, {
+    fetchPolicy: 'no-cache',
+    // nextFetchPolicy: 'cache-first',
+})
+
+const handleChange = (e) => {
+    console.log(e);
+    setAddress({...address, country_code: e})
+    regionData({
+        variables: {
+            countryCode : e
+        }
+    })
+}
+
+console.log(lazyResults);
+
+const regions = lazyResults && lazyResults.data && lazyResults.data.country && lazyResults.data.country.available_regions
 
 console.log(data);
 
@@ -82,11 +110,14 @@ console.log(data);
                 </div>
                 <div className='shipping-input'>
                         <label>Country:</label>
-                        <input 
-                            type="text"
-                            value={address.country_code}
-                            onChange={(e)=> setAddress({...address, country_code: e.target.value})} 
-                        />
+                        <select onChange={(e)=>handleChange(e.target.value)}>
+                            <option>Select Country</option>
+                            {
+                                countriesData.countries.map((el)=> (
+                                    <option value={el.name} >{el.description}</option>
+                                ))
+                            }
+                        </select>
                 </div>
                 <div className='shipping-input'>
                         <label>street Address:</label>
@@ -96,14 +127,14 @@ console.log(data);
                             onChange={(e)=> setAddress({...address, street: e.target.value})} 
                         />
                 </div>
-                <div className='shipping-input'>
+                {/* <div className='shipping-input'>
                         <label>street Address 2:</label>
                         <input 
                             type="text"
                             value={address.street}
                             onChange={(e)=> setAddress({...address, street: e.target.value})} 
                         />
-                </div>
+                </div> */}
                 <div className='shipping-input'>
                         <label>City:</label>
                         <input 
@@ -114,11 +145,13 @@ console.log(data);
                 </div>
                 <div className='shipping-input'>
                         <label>State:</label>
-                        <input 
-                            type="text"
-                            value={address.state}
-                            onChange={(e)=> setAddress({...address, state: e.target.value})} 
-                        />
+                        <select onChange={(e)=> setAddress({...address, region: e.target.value})} >
+                            {
+                                regions && regions.map((el)=> (
+                                    <option value={el.id}>{el.name}</option>
+                                ))
+                            }
+                        </select>
                 </div>
                 <div className='shipping-input'>
                         <label>Zip/ Postal Code:</label>
@@ -136,7 +169,7 @@ console.log(data);
                             onChange={(e)=> setAddress({...address, telephone: e.target.value})} 
                         />
                 </div>
-                <div className='sign-in-button'>
+                <div className='sign-in-button shipping-button'>
                     <button type="submit">SUBMIT</button>
                 </div>
             </form>

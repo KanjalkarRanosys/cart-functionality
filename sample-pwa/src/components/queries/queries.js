@@ -856,3 +856,14 @@ mutation RemoveItemForMiniCart($cartId: String!, $itemId: ID!) {
   }
   
   `
+
+  export const ITEM_COUNT = gql`
+  query getItemCount($cartId:String!){
+    cart(cart_id:$cartId){
+      id ...CartTriggerFragment __typename}}fragment CartTriggerFragment on Cart{
+        id total_quantity __typename}
+  `
+
+  export const GET_REGION = gql`
+  query GetRegions($countryCode:String!){country(id:$countryCode){id available_regions{id code name __typename}__typename}}
+  `
