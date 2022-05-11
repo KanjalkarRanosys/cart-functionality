@@ -47,6 +47,11 @@
     justify-content: center;
 }
 
+.shipping-button {
+    display: flex;
+    justify-content: center;
+}
+
 .shipping-button button {
     background-color: #007bff;
     border: 1px solid #007bff;
@@ -56,4 +61,14 @@
     margin-top: 25px;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.disableRegion {
+    background-color: gray;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    margin-top: 20px;
+    cursor: not-allowed;
 }

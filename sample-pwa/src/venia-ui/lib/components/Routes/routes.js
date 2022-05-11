@@ -14,6 +14,8 @@ import ShoppingCart from '../../../../components/ShoppingCart/shoppingCart';
 import Homepage from '../../../../components/homePage/homepage';
 import SignIn from '../../../../components/SignIn/signIn';
 import ShippingForm from '../../../../components/ShippingForm/shippingForm';
+import Payment from '../../../../components/Payment/payment';
+import OrderStatus from '../../../../components/OrderStatus/orderStatus';
 
 const Routes = () => {
     const { pathname } = useLocation();
@@ -43,12 +45,20 @@ const Routes = () => {
                         <ShoppingCart />
                     </Route>
 
+                    <Route path="/payment">
+                        <Payment />
+                    </Route>
+
                     <Route path="/sign-in">
                         <SignIn />
                     </Route>
 
                     <Route path="/shipping-form">
                         <ShippingForm />
+                    </Route>
+
+                    <Route path="/order-placed">
+                        <OrderStatus />
                     </Route>
                     
                  </Route>

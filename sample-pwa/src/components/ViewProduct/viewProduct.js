@@ -211,9 +211,14 @@ const ViewProduct = () => {
                                 </div>
                             {/* <div className='divider' /> */}
                             <button 
-                                disabled={!selectedColor && selectedSize ? true : false} 
-                                className={selectedColor && selectedSize ? "add-button" : "disable-add-button" }
-                                onClick={()=>{selectedColor && selectedSize && addToCart()}}
+                            // disabled={!isColor && true}
+                                disabled={!selectedColor && !selectedSize && !isColor ? true : false} 
+                                className={
+                                    isColor ?
+                                    selectedColor && selectedSize ? "add-button" : "disable-add-button" : selectedSize ? "add-button" : "disable-add-button" }
+                                onClick={()=>{
+                                    isColor ? 
+                                    selectedColor && selectedSize && addToCart() : selectedSize && addToCart() }}
                             >Add To Cart</button>
                             </div>
                             {/* <div>

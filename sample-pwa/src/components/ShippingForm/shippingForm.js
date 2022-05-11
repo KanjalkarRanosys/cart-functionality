@@ -6,9 +6,12 @@ import { useSelector } from 'react-redux'
 import { GET_REGION, GUEST_ADDRESS, ITEM_COUNT, PRICE_SUMMARY } from '../queries/queries'
 import "./ShippingForm.css"
 import countriesData from '../../../addressData/addressData.json'
+import { useHistory } from 'react-router-dom'
 
 
 const ShippingForm = () => {
+    
+    const history = useHistory()
 
     console.log("countriesData", countriesData);
     const [address, setAddress]= useState({
@@ -37,32 +40,25 @@ const ShippingForm = () => {
 const subTotal = priceSummary && priceSummary.data && priceSummary.data.cart && priceSummary.data.cart.prices.subtotal_excluding_tax.value
 const total = priceSummary && priceSummary.data && priceSummary.data.cart && priceSummary.data.cart.prices.subtotal_including_tax.value
 
-const [setUserAddress, {data}] = useMutation(GUEST_ADDRESS)
+const [setUserAddress, {data, error}] = useMutation(GUEST_ADDRESS)
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault()
-    setUserAddress({
+    await setUserAddress({
         variables: {
             address: address,
             email: email,
             cartId: cartId
         }
     })
+    await !error && history.push('/payment')
 }
-
-console.log(useQuery(GET_REGION, {
-    variables: {
-        countryCode : "IN"
-    }
-}));
 
 const [regionData, lazyResults] = useLazyQuery(GET_REGION, {
     fetchPolicy: 'no-cache',
-    // nextFetchPolicy: 'cache-first',
 })
 
 const handleChange = (e) => {
-    console.log(e);
     setAddress({...address, country_code: e})
     regionData({
         variables: {
@@ -71,11 +67,7 @@ const handleChange = (e) => {
     })
 }
 
-console.log(lazyResults);
-
 const regions = lazyResults && lazyResults.data && lazyResults.data.country && lazyResults.data.country.available_regions
-
-console.log(data);
 
   return (
     <div className='shipping'>
@@ -85,9 +77,10 @@ console.log(data);
             <div className='shipping-input'>
                         <label>Email:</label>
                         <input 
-                            type="text"
+                            type="email"
                             value={email}
-                            onChange={(e)=> setEmail(e.target.value)} 
+                            onChange={(e)=> setEmail(e.target.value)}
+                            required
                         />
                 </div>
                 <div className='shipping-form-one-row'>
@@ -96,7 +89,8 @@ console.log(data);
                             <input 
                                 type="text"
                                 value={address.firstname}
-                                onChange={(e)=> setAddress({...address, firstname: e.target.value})} 
+                                onChange={(e)=> setAddress({...address, firstname: e.target.value})}
+                                required
                             />
                     </div>
                     <div className='shipping-input'>
@@ -104,13 +98,16 @@ console.log(data);
                             <input 
                                 type="text"
                                 value={address.lastname}
-                                onChange={(e)=> setAddress({...address, lastname: e.target.value})} 
+                                onChange={(e)=> setAddress({...address, lastname: e.target.value})}
+                                required
                             />
                     </div>
                 </div>
                 <div className='shipping-input'>
                         <label>Country:</label>
-                        <select onChange={(e)=>handleChange(e.target.value)}>
+                        <select onChange={(e)=>handleChange(e.target.value)}
+                            required
+                        >
                             <option>Select Country</option>
                             {
                                 countriesData.countries.map((el)=> (
@@ -124,28 +121,27 @@ console.log(data);
                         <input 
                             type="text"
                             value={address.street}
-                            onChange={(e)=> setAddress({...address, street: e.target.value})} 
+                            onChange={(e)=> setAddress({...address, street: e.target.value})}
+                            required
                         />
                 </div>
-                {/* <div className='shipping-input'>
-                        <label>street Address 2:</label>
-                        <input 
-                            type="text"
-                            value={address.street}
-                            onChange={(e)=> setAddress({...address, street: e.target.value})} 
-                        />
-                </div> */}
                 <div className='shipping-input'>
                         <label>City:</label>
                         <input 
                             type="text"
                             value={address.city}
-                            onChange={(e)=> setAddress({...address, city: e.target.value})} 
+                            onChange={(e)=> setAddress({...address, city: e.target.value})}
+                            required
                         />
                 </div>
                 <div className='shipping-input'>
                         <label>State:</label>
-                        <select onChange={(e)=> setAddress({...address, region: e.target.value})} >
+                        <select 
+                            disabled={lazyResults.loading ? true : false }
+                            className={lazyResults.loading && "disableRegion" }
+                            onChange={(e)=> setAddress({...address, region: e.target.value})}
+                            required
+                        >
                             {
                                 regions && regions.map((el)=> (
                                     <option value={el.id}>{el.name}</option>
@@ -158,7 +154,8 @@ console.log(data);
                         <input 
                             type="text"
                             value={address.postcode}
-                            onChange={(e)=> setAddress({...address, postcode: e.target.value})} 
+                            onChange={(e)=> setAddress({...address, postcode: e.target.value})}
+                            required
                         />
                 </div>
                 <div className='shipping-input'>
@@ -166,11 +163,12 @@ console.log(data);
                         <input 
                             type="text"
                             value={address.telephone}
-                            onChange={(e)=> setAddress({...address, telephone: e.target.value})} 
+                            onChange={(e)=> setAddress({...address, telephone: e.target.value})}
+                            required
                         />
                 </div>
-                <div className='sign-in-button shipping-button'>
-                    <button type="submit">SUBMIT</button>
+                <div className='shipping-button'>
+                    <button type="submit">CONTINUE TO SHIPPING METHOD</button>
                 </div>
             </form>
         </div>
