@@ -7,6 +7,8 @@ import { GET_REGION, GUEST_ADDRESS, ITEM_COUNT, PRICE_SUMMARY } from '../queries
 import "./ShippingForm.css"
 import countriesData from '../../../addressData/addressData.json'
 import { useHistory } from 'react-router-dom'
+import { fullPageLoadingIndicator } from '../../venia-ui/lib/components/LoadingIndicator'
+import Payment from '../Payment/payment'
 
 
 const ShippingForm = () => {
@@ -25,6 +27,7 @@ const ShippingForm = () => {
         telephone: ""
     })
     const [email, setEmail]= useState()
+    const [showBilling, setShowBilling] = useState(false)
 
   const storeDetails = useSelector((state)=> state)
   const cartId = storeDetails && storeDetails.cart && storeDetails.cart.cartId
@@ -51,10 +54,11 @@ const handleSubmit = async (e) => {
             cartId: cartId
         }
     })
-    await !error && history.push('/payment')
+    // await !error && history.push('/payment')
+    setShowBilling(true)
 }
 
-const [regionData, lazyResults] = useLazyQuery(GET_REGION, {
+const [regionData, regionResults] = useLazyQuery(GET_REGION, {
     fetchPolicy: 'no-cache',
 })
 
@@ -67,10 +71,13 @@ const handleChange = (e) => {
     })
 }
 
-const regions = lazyResults && lazyResults.data && lazyResults.data.country && lazyResults.data.country.available_regions
+const regions = regionResults && regionResults.data && regionResults.data.country && regionResults.data.country.available_regions
 
   return (
     <div className='shipping'>
+    {priceSummary.loading ? <div>{fullPageLoadingIndicator}</div>:
+    !showBilling ? 
+    <>
         <div className='shipping-form' >
         <h1 className='shipping-heading'>SHIPPING FORM</h1>
             <form onSubmit={handleSubmit}>
@@ -137,8 +144,8 @@ const regions = lazyResults && lazyResults.data && lazyResults.data.country && l
                 <div className='shipping-input'>
                         <label>State:</label>
                         <select 
-                            disabled={lazyResults.loading ? true : false }
-                            className={lazyResults.loading && "disableRegion" }
+                            disabled={regionResults.loading ? true : false }
+                            className={regionResults.loading && "disableRegion" }
                             onChange={(e)=> setAddress({...address, region: e.target.value})}
                             required
                         >
@@ -185,6 +192,9 @@ const regions = lazyResults && lazyResults.data && lazyResults.data.country && l
                 </div>
             </div>
         </div>
+        </> : 
+        <Payment />
+        }
     </div>
   )
 }

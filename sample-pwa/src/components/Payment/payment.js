@@ -27,6 +27,12 @@ const Payment = () => {
         e.preventDefault()
         history.push('/order-placed')
     }
+    
+    // const cardNumberChange = (e, limit) => {
+    //     if (e.target.value > limit) {
+    //         e.target.value = e.target.value.slice(0, limit)
+    //     }
+    // }
 
   return (
     <div>
@@ -36,11 +42,14 @@ const Payment = () => {
                     <h1>PAYMENT FORM</h1>
                     <div className='payment-one-field'>
                         <label>Card Holder Name</label>
-                        <input required type="text" />
+                        <input required type="text"/>
                     </div>
                     <div className='payment-one-field'>
                         <label>Card Number</label>
-                        <input required type="text" />
+                        <input required type="text" className='number-without-up-down' 
+                        maxLength="16" minLength="16"
+                            // onChange={(e)=>{cardNumberChange(e, 16)}}
+                        />
                     </div>
                     <div className='payment-one-field'>
                         <label>Expiry Date</label>
@@ -48,7 +57,10 @@ const Payment = () => {
                     </div>
                     <div className='payment-one-field'>
                         <label>CVV Number</label>
-                        <input required type="text" />
+                        <input required type="text" 
+                        maxLength="3" minLength="3" 
+                        // onChange={(e)=>{cardNumberChange(e, 3)}} 
+                        />
                     </div>
                     <div className='plcae-order-button'>
                         <button type='submit'>PLACE ORDER</button>

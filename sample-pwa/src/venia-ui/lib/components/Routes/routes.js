@@ -53,7 +53,7 @@ const Routes = () => {
                         <SignIn />
                     </Route>
 
-                    <Route path="/shipping-form">
+                    <Route path="/checkout">
                         <ShippingForm />
                     </Route>
 

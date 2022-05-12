@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client'
 import React from 'react'
 import { useState } from 'react'
+import { fullPageLoadingIndicator } from '../../venia-ui/lib/components/LoadingIndicator'
 import ProductListing from '../productListing/productListing'
 import { GET_DRESSES } from '../queries/queries'
 import "./HomePage.css"
@@ -11,15 +12,10 @@ const Homepage = () => {
         variables: {"currentPage":1,"id":"MzY=","filters":{"category_uid":{"eq":"MzY="}},"pageSize":12,"sort":{"position":"ASC"}}
     })
 
-    const [isLoading, setIsLoading] = useState(false)
-
-    if (!data) {
-      <div>loading....</div>
-    }
-
   return (
     <div>
-      {!data ? <div>Loading...</div> :
+    {loading ? <div>{fullPageLoadingIndicator}</div>:
+    <>
       <div className='home-banner'>
         <div className='home-banner-content'>
           <h1 className='home-banner-content-heading'>Where does it come from?</h1>
@@ -30,8 +26,10 @@ const Homepage = () => {
           </p>
           <button className='home-banner-button'>SHOP NOW</button>
         </div>
-      </div>}
+      </div>
       <ProductListing data={data} componentName="TOP PRODUCTS" />
+      </>
+    }
     </div>
   )
 }

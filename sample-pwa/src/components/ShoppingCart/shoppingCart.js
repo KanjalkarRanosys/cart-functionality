@@ -5,6 +5,7 @@ import { useState } from 'react'
 import "./ShoppingCart.css"
 import { DELETE_PRODUCT, GET_CART_DETAILS, UPDATE_QUANTITY } from '../queries/queries'
 import { Link } from 'react-router-dom'
+import { fullPageLoadingIndicator } from '../../venia-ui/lib/components/LoadingIndicator'
 
 const ShoppingCart = () => {
 
@@ -31,7 +32,7 @@ const [deleteProduct, {data}] = useMutation(DELETE_PRODUCT, {
 })
 
 
-const [updateQuantity] = useMutation(UPDATE_QUANTITY, {
+const [updateQuantity, {loading}] = useMutation(UPDATE_QUANTITY, {
   variables: {
     cartId:cartId,
     itemId: updateItem && updateItem,
@@ -46,6 +47,8 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
 
   return (
     <div className='cart'>
+    {loading ? <div>{fullPageLoadingIndicator}</div>:
+    <>
         {cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart && cartIDDetails.data.cart.items ?
         <div className='cart-product-list'>
 
@@ -79,16 +82,16 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
                     </div>
                     <div className='cart-quantity-delete'>
                       <div className='cart-quantity'>
-                        <button
+                        <button className={el.quantity == 1 ? "disable-cart-Quantity-update" : "cart-quantity-update"}
                             onClick={ async ()=> {
-                              await setProductCount(el.quantity - 1)
-                              await setUpdateItem(el.uid)
-                              await updateQuantity()
-                              await setUpdateItem()
+                              el.quantity > 1 && await setProductCount(el.quantity - 1), await setUpdateItem(el.uid), await updateQuantity(), await setUpdateItem()
+                              // !el.quantity == 1 && await 
+                              // !el.quantity == 1 && await 
+                              // !el.quantity == 1 && await 
                             }}
                         >-</button>
                             <span className='cart-single-product-quantity'>{el.quantity }</span>
-                        <button
+                        <button className="cart-quantity-update"
                             onClick={ async ()=> {
                               await setProductCount(el.quantity + 1)
                               await setUpdateItem(el.uid)
@@ -118,13 +121,13 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
       </div>
 
       <div className='checkout-button'>
-        <Link to='/shipping-form'>
+        <Link to='/checkout'>
           <button> PROCEED TO CHECKOUT</button>
         </Link>
       </div>
     </div>
 
-
+</>}
     </div>
   )
 }

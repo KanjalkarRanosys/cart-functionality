@@ -7,7 +7,7 @@
 .payment-form {
     background-color: #e7edf5;
     padding: 20px 40px;
-    width: 30%;
+    /* width: 30%; */
 }
 
 .payment-form h1 {
@@ -43,4 +43,24 @@
     border-radius: 5px;
     background-color: #007bff;
     color: #fff;
+}
+
+.number-without-up-down::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+}
+
+.cart-price {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cart-total-quantity {
+    padding: 40px 60px;
+    margin-top: 30px;
+    border-radius: 5px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    width: 100%;
+    margin-left: 130px;
 }

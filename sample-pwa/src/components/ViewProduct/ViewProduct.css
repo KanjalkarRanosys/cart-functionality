@@ -1,5 +1,6 @@
 .view-product-details {
     background-color: #ffffff;
+    padding-top: 10px;
 }
 
 .view-product-detail {
@@ -94,7 +95,7 @@
     margin: 20px 0;
 }
 
-.view-product-quantity button {
+.view-product-quantity .quantityButton {
     background-color: "rgb(169 169 181)";
     padding:"10px 30px";
     border: 1px solid rgb(34, 34, 34);
@@ -102,6 +103,16 @@
     height: 30px;
     border-radius: 50%;
 }
+
+.view-product-quantity .disableQuantityUpdate {
+    background-color: #dfdfdf;
+    padding:"10px 30px";
+    border: 1px solid #dfdfdf;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: not-allowed;
+} 
 
 .quantity-text {
     font-size: 16px;
@@ -164,4 +175,9 @@
 
 .meta-desc {
     line-height: 20px;
+}
+
+.disableQuantityUpdate {
+    background-color: gray;
+    cursor: not-allowed;
 }
