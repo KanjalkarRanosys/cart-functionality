@@ -21,3 +21,11 @@ query GetCategories($id:String!$pageSize:Int!$currentPage:Int!$filters:ProductAt
                         currency value __typename}regular_price{currency value __typename}__typename}__typename}sku small_image{
                             url __typename}stock_status rating_summary __typename url_key}page_info{total_pages __typename}total_count __typename}
 ` 
+
+export const SEARCHING_PRODUCTS = gql`
+query getAutocompleteResults($inputText:String!){products(search:$inputText currentPage:1 pageSize:3){
+    aggregations{label count attribute_code options{label value __typename}position __typename}items{
+        id uid name small_image{url __typename}url_key url_suffix price{regularPrice{amount{
+            value currency __typename}__typename}__typename}price_range{maximum_price{final_price{
+                currency value __typename}__typename}__typename}__typename}page_info{total_pages __typename}total_count __typename}}
+`
