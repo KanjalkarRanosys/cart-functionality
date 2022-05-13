@@ -2,7 +2,7 @@ import { useQuery, gql } from '@apollo/client'
 import React from 'react'
 import { fullPageLoadingIndicator } from '../../venia-ui/lib/components/LoadingIndicator';
 import ProductListing from '../productListing/productListing';
-import { GET_PRODUCTS } from '../queries/queries';
+import { GET_PRODUCTS } from '../queries/ProductListQueries/productListQueries';
 import "./ProductList.css"
 
 const ProductList = () => {

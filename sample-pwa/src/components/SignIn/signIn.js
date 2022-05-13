@@ -4,16 +4,12 @@ import { useState } from 'react'
 import { useRef } from 'react'
 import GoogleReCaptcha from '../../venia-ui/lib/components/GoogleReCaptcha'
 import CustomInput from '../input/customInput'
-import { SIGN_IN } from '../queries/queries'
 import "./SignIn.css"
 
 const SignIn = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
-        const [getUserDetail, {data}] = useMutation(SIGN_IN)
-        console.log(data);
 
     const handleSubmit = (e) => {
         e.preventDefault()

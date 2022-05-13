@@ -3,9 +3,10 @@ import { useQuery, gql, useMutation } from '@apollo/client'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import "./ShoppingCart.css"
-import { DELETE_PRODUCT, GET_CART_DETAILS, UPDATE_QUANTITY } from '../queries/queries'
 import { Link } from 'react-router-dom'
 import { fullPageLoadingIndicator } from '../../venia-ui/lib/components/LoadingIndicator'
+import { GET_CART_DETAILS } from '../queries/CartQueries/cartQueries'
+import { DELETE_PRODUCT, UPDATE_QUANTITY } from '../queries/SingleProductQueries/singleProductQueries'
 
 const ShoppingCart = () => {
 

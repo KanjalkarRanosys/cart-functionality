@@ -3,12 +3,13 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { GET_REGION, GUEST_ADDRESS, ITEM_COUNT, PRICE_SUMMARY } from '../queries/queries'
 import "./ShippingForm.css"
 import countriesData from '../../../addressData/addressData.json'
 import { useHistory } from 'react-router-dom'
 import { fullPageLoadingIndicator } from '../../venia-ui/lib/components/LoadingIndicator'
 import Payment from '../Payment/payment'
+import { GET_REGION, GUEST_ADDRESS } from '../queries/ShippingQueries/shippingQueries'
+import { ITEM_COUNT, PRICE_SUMMARY } from '../queries/CartQueries/cartQueries'
 
 
 const ShippingForm = () => {
@@ -186,7 +187,7 @@ const regions = regionResults && regionResults.data && regionResults.data.countr
             </form>
         </div>
         <div className='cart-price'>
-            <div className='cart-total-quantity'>
+            <div className='shipping-cart-total-quantity'>
                 <div className='desc-quantity-total'>
                     <span className='desc-key'>Sub-Total: </span>
                     <span className='desc-value'>{subTotal}</span>

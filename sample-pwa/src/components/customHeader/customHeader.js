@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { GET_CART_COUNT, GET_CART_DETAILS } from '../queries/queries'
+import { GET_CART_COUNT, GET_CART_DETAILS } from '../queries/CartQueries/cartQueries'
 import "./CustomHeader.css"
 
 const CustomHeader = () => {
