@@ -1,9 +1,7 @@
 import { useMutation, useQuery } from '@apollo/client'
 import React from 'react'
-import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { DELETE_CART } from '../queries/queries'
 import "./Payment.css"
 
 const Payment = (props) => {
