@@ -1,38 +1,34 @@
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { PRICE_SUMMARY } from '../queries/queries'
+import { DELETE_CART, PRICE_SUMMARY, SHIPPING_METHOD } from '../queries/queries'
 import "./Payment.css"
 
-const Payment = () => {
+const Payment = (props) => {
 
     const history = useHistory()
+
+    console.log(props);
     
     const storeDetails = useSelector((state)=> state)
     const cartId = storeDetails && storeDetails.cart && storeDetails.cart.cartId
 
-    console.log(storeDetails);
+    // console.log(storeDetails);
 
-    const priceSummary = useQuery(PRICE_SUMMARY, {
-        "cartId": cartId,
-    })
+    // const priceSummary = useQuery(PRICE_SUMMARY, {
+    //     "cartId": cartId,
+    // })
 
-    console.log(priceSummary);
+    // console.log(priceSummary);
 
-    const subTotal = priceSummary && priceSummary.data && priceSummary.data.cart && priceSummary.data.cart.prices.subtotal_excluding_tax.value
-    const total = priceSummary && priceSummary.data && priceSummary.data.cart && priceSummary.data.cart.prices.subtotal_including_tax.value
+    // const subTotal = priceSummary && priceSummary.data && priceSummary.data.cart && priceSummary.data.cart.prices.subtotal_excluding_tax.value
+    // const total = priceSummary && priceSummary.data && priceSummary.data.cart && priceSummary.data.cart.prices.subtotal_including_tax.value
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         history.push('/order-placed')
     }
-    
-    // const cardNumberChange = (e, limit) => {
-    //     if (e.target.value > limit) {
-    //         e.target.value = e.target.value.slice(0, limit)
-    //     }
-    // }
 
   return (
     <div>
@@ -71,17 +67,17 @@ const Payment = () => {
                 <div className='cart-total-quantity'>
                         <div className='desc-quantity-total'>
                             <span className='desc-key'>Sub-Total: </span>
-                            <span className='desc-value'>{subTotal}</span>
+                            <span className='desc-value'>{props.subTotal}</span>
                         </div>
                     <br />
-                    <div className='desc-quantity-total'>
+                    {/* <div className='desc-quantity-total'>
                         <span className='desc-key'>Shipping: </span>
                         <span className='desc-value'>Free</span>
-                    </div>
+                    </div> */}
                     <br />
                     <div className='desc-quantity-total'>
                         <span className='desc-key'>Total: </span>
-                        <span className='desc-value'>{total}</span>
+                        <span className='desc-value'>{props.total}</span>
                     </div>
                 </div>
             </div>

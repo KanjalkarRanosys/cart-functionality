@@ -52,7 +52,7 @@
     justify-content: center;
 }
 
-.shipping-button button {
+.shipping-button .not-disable-shipping {
     background-color: #007bff;
     border: 1px solid #007bff;
     padding: 10px 25px;
@@ -62,6 +62,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.shipping-button .disable-shipping {
+    background-color: #dbdbdb;
+    border: 1px solid #dbdbdb;
+    padding: 10px 25px;
+    border-radius: 5px;
+    color: #fff;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: not-allowed;
 }
 
 .disableRegion {

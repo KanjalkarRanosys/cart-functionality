@@ -28,6 +28,7 @@ const ShippingForm = () => {
     })
     const [email, setEmail]= useState()
     const [showBilling, setShowBilling] = useState(false)
+    const [isDisable, setIsDisable] = useState(false)
 
   const storeDetails = useSelector((state)=> state)
   const cartId = storeDetails && storeDetails.cart && storeDetails.cart.cartId
@@ -43,7 +44,8 @@ const ShippingForm = () => {
 const subTotal = priceSummary && priceSummary.data && priceSummary.data.cart && priceSummary.data.cart.prices.subtotal_excluding_tax.value
 const total = priceSummary && priceSummary.data && priceSummary.data.cart && priceSummary.data.cart.prices.subtotal_including_tax.value
 
-const [setUserAddress, {data, error}] = useMutation(GUEST_ADDRESS)
+const [setUserAddress, {data, loading: setUserLoading, error}] = useMutation(GUEST_ADDRESS)
+
 
 const handleSubmit = async (e) => {
     e.preventDefault()
@@ -55,7 +57,8 @@ const handleSubmit = async (e) => {
         }
     })
     // await !error && history.push('/payment')
-    setShowBilling(true)
+    await setIsDisable(true)
+    await setShowBilling(true)
 }
 
 const [regionData, regionResults] = useLazyQuery(GET_REGION, {
@@ -175,7 +178,9 @@ const regions = regionResults && regionResults.data && regionResults.data.countr
                         />
                 </div>
                 <div className='shipping-button'>
-                    <button type="submit">CONTINUE TO SHIPPING METHOD</button>
+                    <button type="submit" className={setUserLoading ? "disable-shipping" : "not-disable-shipping"}
+                        disabled={setUserLoading && true}
+                    >CONTINUE TO SHIPPING METHOD</button>
                 </div>
             </form>
         </div>
@@ -193,7 +198,11 @@ const regions = regionResults && regionResults.data && regionResults.data.countr
             </div>
         </div>
         </> : 
-        <Payment />
+        <>
+        {setUserLoading ? <div>{fullPageLoadingIndicator}</div>:
+            <Payment total= {total} subTotal={subTotal} cartId={cartId} />
+        }
+        </>
         }
     </div>
   )
