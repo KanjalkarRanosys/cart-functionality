@@ -38,8 +38,10 @@ const ViewProduct = () => {
         );
 
     const skuGet =
-        data && data.products && data.products.items.map(el => el.sku);
-    const skuValue = skuGet + '';
+        data && data.products && data.products.items.find(el => (
+            urlKey === el.url_key
+        ));
+    const skuValue = skuGet.sku + '';
     // const configurable_options = itemValues && itemValues.map((e)=> e)
 
     const [addToCart, { loading: addToCartLoader }] = useMutation(
@@ -65,6 +67,8 @@ const ViewProduct = () => {
                     {data &&
                         data.products &&
                         data.products.items.map(el => (
+                            el.url_key === urlKey &&
+                            <>
                             <div>
                                 <div className="view-product-detail">
                                     <img
@@ -79,7 +83,7 @@ const ViewProduct = () => {
                                             Price: $
                                             {el.price.regularPrice.amount.value}
                                         </div>
-                                        {/* {el.__typename == "ConfigurableProduct"} */}
+                                        {el.__typename == "ConfigurableProduct" &&
                                         <>
                                             <div>
                                                 {el.configurable_options &&
@@ -162,9 +166,20 @@ const ViewProduct = () => {
                                             </div>
 
                                             <div className="fashion-size">
-                                                <div className="detail-text">
+                                            {el.configurable_options &&
+                                                    el.configurable_options.map(
+                                                        element =>
+                                                            element.attribute_code ==
+                                                                'fashion_size' && (
+                                                                <div className="detail-text">
+                                                                    Fashion
+                                                                    Color:
+                                                                </div>
+                                                            )
+                                                    )}
+                                                {/* <div className="detail-text">
                                                     Fashion Size:
-                                                </div>
+                                                </div> */}
                                                 <div className="fashion-size-options">
                                                     {el.configurable_options &&
                                                         el.configurable_options.map(
@@ -221,6 +236,7 @@ const ViewProduct = () => {
                                                 </div>
                                             </div>
                                         </>
+}
                                         <div className="view-product-quantity">
                                             Quantity:
                                             <div className="grp-column">
@@ -280,16 +296,19 @@ const ViewProduct = () => {
                                                     : 'add-button'
                                             }
                                             onClick={async () => {
-                                                el.__typename ==
+                                                el.__typename !=
                                                 'ConfigurableProduct'
-                                                    ? selectedColor &&
-                                                      selectedSize &&
-                                                      (await addToCart())
-                                                    ? selectedSize &&
+                                                    ? await addToCart() : selectedColor &&
+                                                      selectedSize ?
                                                       (await addToCart(),
                                                       setSelectedColor(),
                                                       setSelectedSize(),
-                                                      setSelectedOptions([])) : await addToCart() : await addToCart()
+                                                      setSelectedOptions([]))
+                                                    : selectedSize &&
+                                                      (await addToCart(),
+                                                      setSelectedColor(),
+                                                      setSelectedSize(),
+                                                      setSelectedOptions([]))
                                             }}
                                         >
                                             Add To Cart
@@ -322,7 +341,7 @@ const ViewProduct = () => {
                                     </div>
                                 </div>
                             </div>
-
+</>
                             // </div>
                         ))}
                 </>

@@ -25,7 +25,7 @@ const ShoppingCart = () => {
     }
 })
 
-const [deleteProduct, {data}] = useMutation(DELETE_PRODUCT, {
+const [deleteProduct, {loading: deleteProductLoading}] = useMutation(DELETE_PRODUCT, {
     variables: {
         "cartId": cartId,
         "itemId": deleteItem
@@ -48,7 +48,7 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
 
   return (
     <div className='cart'>
-    {loading ? <div>{fullPageLoadingIndicator}</div>:
+    {loading || deleteProductLoading ? <div>{fullPageLoadingIndicator}</div>:
     <>
         {cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart && cartIDDetails.data.cart.items ?
         <div className='cart-product-list'>

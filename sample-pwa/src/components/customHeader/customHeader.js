@@ -52,6 +52,8 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
 
   console.log(searchingProducts);
 
+  const [searchingData, setSearchingData] = useState()
+
   // !isSearchBox && searchingResults
 
   const searchingResults = searchingProducts && searchingProducts.data && searchingProducts.data.products && searchingProducts.data.products
