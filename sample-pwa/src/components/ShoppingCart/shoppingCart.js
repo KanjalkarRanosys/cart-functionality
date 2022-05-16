@@ -68,10 +68,10 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
                         <span className='desc-key'>{el.product.name} </span>
                       </div>
                       <div className='padding-desc'>Product Price: ${el.prices.price.value}</div>
-                      <div className='padding-desc'>Fashion Color: {el.configurable_options.map((item)=>(
+                      <div className='padding-desc'>Fashion Color: {el.configurable_options && el.configurable_options.map((item)=>(
                         item.option_label == "Fashion Color" && item.value_label
                       ))}</div>
-                      <div className='padding-desc'>Fashion Size: {el.configurable_options.map((item)=>(
+                      <div className='padding-desc'>Fashion Size: {el.configurable_options && el.configurable_options.map((item)=>(
                         item.option_label == "Fashion Size" && item.value_label
                       ))}</div>
                       <button className='delete-button'

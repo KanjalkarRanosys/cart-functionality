@@ -2,24 +2,15 @@ import { useQuery } from '@apollo/client'
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 import { fullPageLoadingIndicator } from '../../venia-ui/lib/components/LoadingIndicator'
+import UseParseParams from '../CustomHooks/useParseParams'
 import ProductListing from '../productListing/productListing'
 import { GET_FILTERED_PRODUCTS } from '../queries/ProductListQueries/productListQueries'
 
 const FilteredProducts = () => {
 
-    const parseParams = (params = "") => {
-        const rawParams = params.replace("?", "").split("&");
-        const extractedParams = {};
-        rawParams.forEach((item) => {
-          item = item.split("=");
-          extractedParams[item[0]] = item[1];
-        });
-        return extractedParams;
-      };
-
     const {search} = useLocation()
 
-    const urlParams = parseParams(search)
+    const urlParams = UseParseParams(search)
     console.log(urlParams.query);
 
     const filteredProductsList = useQuery(GET_FILTERED_PRODUCTS, {
