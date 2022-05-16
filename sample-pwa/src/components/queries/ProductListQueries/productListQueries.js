@@ -29,3 +29,11 @@ query getAutocompleteResults($inputText:String!){products(search:$inputText curr
             value currency __typename}__typename}__typename}price_range{maximum_price{final_price{
                 currency value __typename}__typename}__typename}__typename}page_info{total_pages __typename}total_count __typename}}
 `
+
+export const GET_FILTERED_PRODUCTS = gql`
+query ProductSearch($currentPage:Int=1$inputText:String!$pageSize:Int=6$filters:ProductAttributeFilterInput!$sort:ProductAttributeSortInput){
+    products(currentPage:$currentPage pageSize:$pageSize search:$inputText filter:$filters sort:$sort){
+        items{id uid name price_range{maximum_price{final_price{
+            currency value __typename}regular_price{currency value __typename}__typename}__typename}sku small_image{
+                url __typename}stock_status __typename url_key}page_info{total_pages __typename}total_count __typename}}
+`

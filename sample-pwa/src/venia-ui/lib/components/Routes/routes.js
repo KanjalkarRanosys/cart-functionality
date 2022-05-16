@@ -16,6 +16,7 @@ import SignIn from '../../../../components/SignIn/signIn';
 import ShippingForm from '../../../../components/ShippingForm/shippingForm';
 import Payment from '../../../../components/Payment/payment';
 import OrderStatus from '../../../../components/OrderStatus/orderStatus';
+import FilteredProducts from '../../../../components/FilteredProducts/filteredProducts';
 
 const Routes = () => {
     const { pathname } = useLocation();
@@ -37,7 +38,7 @@ const Routes = () => {
                         <ProductList />
                     </Route>
 
-                    <Route path="/view-product/:name">
+                    <Route exact path="/view-product/:name">
                         <ViewProduct />
                     </Route>
 
@@ -59,6 +60,10 @@ const Routes = () => {
 
                     <Route path="/order-placed">
                         <OrderStatus />
+                    </Route>
+                    
+                    <Route path="/filtered-products">
+                        <FilteredProducts />
                     </Route>
                     
                  </Route>

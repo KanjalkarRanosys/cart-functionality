@@ -44,27 +44,24 @@
     top: 70px;
     left: 35%;
     border: 1px solid gray;
-    padding: 25px;
+    padding: 10px;
     background: #fff;
     border-radius: 5px;
     height: auto;
     box-shadow: #694ae359 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
 }
 
 .search-icon img{
     width: 30px;
 }
 
-.flex-row {
+.search-header {
     display: flex;
     align-items: center;
-}
-
-.searching-items {
-    display: flex;
-    /* align-items: center;
-    justify-content: center; */
-    width: 20%;
+    cursor: pointer;
 }
 
 .search-products {
@@ -101,4 +98,13 @@
 
 .searching-one-product div {
     max-width: 33.33%;
+}
+
+.search-box-close-button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-box-close-button span {
+    cursor: pointer;
 }

@@ -2,17 +2,23 @@ import { useLazyQuery, useQuery } from '@apollo/client'
 import React from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import CheckOutsideClicked from '../CustomHooks/checkOutsideClicked'
 import { GET_CART_COUNT, GET_CART_DETAILS } from '../queries/CartQueries/cartQueries'
 import { SEARCHING_PRODUCTS } from '../queries/ProductListQueries/productListQueries'
 import "./CustomHeader.css"
+import SearchPopup from './searchPopup'
 
 const CustomHeader = () => {
 
   const storeDetails = useSelector((state)=> state)
   const cartId = storeDetails && storeDetails.cart ? storeDetails.cart.cartId : ""
 
+  const history = useHistory()
+
   const [isSearchBox, setIsSearchBox] = useState(false)
+  const [isSearchingResults, setIsSearchingResults]= useState()
+  const[open, setOpen]= useState(false)
 
   const {data} = useQuery(GET_CART_COUNT, {
     variables: {
@@ -34,6 +40,7 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
   })
 
   const handleSearchProducts = (e) => {
+    setSearchResult(e.target.value)
     getSearchingProducts({
       variables: {
         "inputText": e.target.value
@@ -45,34 +52,41 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
 
   console.log(searchingProducts);
 
+  // !isSearchBox && searchingResults
+
   const searchingResults = searchingProducts && searchingProducts.data && searchingProducts.data.products && searchingProducts.data.products
+
+  const handleClosePopup = ()=>{
+    setOpen(false)
+  }
+
+  const handleOpenPopup = () => {
+    {
+      open ? setOpen(false) : setOpen(true)
+    }
+  }
+
+  const [searchResult, setSearchResult] = useState()
+
+  const filteredSearchProducts = async (e) => {
+    e.preventDefault()
+    await history.push("/filtered-products?query="+ searchResult)
+    await setOpen(false)
+  }
 
   console.log(searchingResults);
   return (
     <div className='custom-header' >
-      { isSearchBox && 
-        <div className='searching-items'>
-          <div className='search-products'>
-            <div className='input-search'>
-              <input
-              placeholder='search' 
-                type="text" 
-                className='search-input' 
-                onChange={(e)=> {handleSearchProducts(e)}}
-              />
-            </div>
-            <div className='searching-list'>
-              {searchingResults && searchingResults.items && searchingResults.items.map((el)=> (
-                <div className='searching-one-product'>
-                  <div><img src={el.small_image.url} /></div>
-                  <div>{el.name}</div>
-                  <div>${el.price.regularPrice.amount.value}</div>
-                </div>
-              ))  }
-            </div>
-          </div>
-        </div>
-      }
+      <CheckOutsideClicked onClickOutside={handleClosePopup}>
+        <SearchPopup 
+          open={open} 
+          handleClose={handleClosePopup} 
+          searchingResults= {searchingResults} 
+          handleSearchProducts={handleSearchProducts} 
+          filteredSearchProducts={filteredSearchProducts}
+          searchingProducts={searchingProducts}
+        />
+      </CheckOutsideClicked>
 
 
         <Link to={'/'} className="home-button">
@@ -88,14 +102,12 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
         </Link>
         <div className="cart-button" >
           <div className='search-by-filter-button' >
-            <button 
-              onClick={()=> {
-                setIsSearchBox(isSearchBox ? false : true)
-              }} 
-              className='flex-row'>
+            <span 
+              onClick={handleOpenPopup} 
+              className='search-header'>
               <span className='search-icon'><img src='https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-512.png' /></span>
               <span>Search</span>
-            </button>
+            </span>
           </div>
           <Link to={'/shopping-cart'}>
             <span

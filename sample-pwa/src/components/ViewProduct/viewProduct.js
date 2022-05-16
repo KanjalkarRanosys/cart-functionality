@@ -28,6 +28,7 @@ const ViewProduct = () => {
     const storeDetails = useSelector((state)=> state)
     const cartId = storeDetails.cart.cartId
     const [isColor, setIsColor] = useState(false)
+    const [isSize, setIsSize] = useState(false)
 
 
     const itemValues = data && data.products && data.products.items.map((el) => (
@@ -68,14 +69,14 @@ const ViewProduct = () => {
                                 <div>Price: ${el.price.regularPrice.amount.value}</div>
                             <div>
 
-                            {el.configurable_options.map((element)=>(
+                            {el.configurable_options && el.configurable_options.map((element)=>(
                                 element.attribute_code == "fashion_color" &&
                                     <div className='detail-text'>Fashion Color:</div>
                                     )
                                 )
                             }
                                 <div className='fashion-size-options'>
-                                    {el.configurable_options.map((element)=>(
+                                    {el.configurable_options && el.configurable_options.map((element)=>(
                                         element.attribute_code == "fashion_color" &&
                                         element.values.map((item)=>(
                                             <div>
@@ -112,7 +113,7 @@ const ViewProduct = () => {
                             <div className='fashion-size'>
                                             <div className='detail-text' >Fashion Size:</div>
                                             <div className='fashion-size-options'>
-                                {el.configurable_options.map((element)=>(
+                                {el.configurable_options && el.configurable_options.map((element)=>(
                                     element.attribute_code == "fashion_size" &&
                                     element.values.map((item)=>(
                                         <div>
@@ -163,7 +164,7 @@ const ViewProduct = () => {
                             {/* <div className='divider' /> */}
                             <button 
                             // disabled={!isColor && true}
-                                disabled={!selectedColor && !selectedSize && !isColor ? true : false} 
+                                disabled={el.configurable_options && !selectedColor && !selectedSize ? true : false} 
                                 className={
                                     isColor ?
                                     selectedColor && selectedSize ? "add-button" : "disable-add-button" : selectedSize ? "add-button" : "disable-add-button" }
