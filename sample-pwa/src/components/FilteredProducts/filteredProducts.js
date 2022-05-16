@@ -3,6 +3,7 @@ import React from 'react'
 import { useLocation } from 'react-router-dom'
 import { fullPageLoadingIndicator } from '../../venia-ui/lib/components/LoadingIndicator'
 import UseParseParams from '../CustomHooks/useParseParams'
+import NoFilteredProducts from '../NoFilteredProducts/noFilteredProducts'
 import ProductListing from '../productListing/productListing'
 import { GET_FILTERED_PRODUCTS } from '../queries/ProductListQueries/productListQueries'
 
@@ -27,10 +28,12 @@ const FilteredProducts = () => {
   return (
     <div>
         {filteredProductsList.loading ? <div>{fullPageLoadingIndicator}</div>:
+        data && data.products && data.products.items && data.products.items.length !==0 ?
             <ProductListing 
                 data={data? data : null} 
                 componentName="FILTERED PRODUCT LIST" 
             />
+            : <NoFilteredProducts />
         }
     </div>
   )

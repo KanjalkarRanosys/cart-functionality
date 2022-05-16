@@ -7,7 +7,6 @@ const ProductListing = (props) => {
 
   return (
   <div className='product-listing'>
-    {props.data && props.data.products && props.data.products.items.length != 0 ? 
     <>
     <div className='component-header'>
       <h2>{props.componentName}</h2>   
@@ -29,8 +28,6 @@ const ProductListing = (props) => {
         } 
     </div>
     </>
-    : <div><NoFilteredProducts componentName= {props.componentName}/></div>
-    }
     </div>
   )
 }

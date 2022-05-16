@@ -41,7 +41,7 @@ const ViewProduct = () => {
         data && data.products && data.products.items.find(el => (
             urlKey === el.url_key
         ));
-    const skuValue = skuGet.sku + '';
+    const skuValue = skuGet && skuGet.sku + '';
     // const configurable_options = itemValues && itemValues.map((e)=> e)
 
     const [addToCart, { loading: addToCartLoader }] = useMutation(
