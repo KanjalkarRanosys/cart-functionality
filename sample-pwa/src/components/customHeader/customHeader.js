@@ -41,6 +41,7 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
 
   const handleSearchProducts = (e) => {
     setSearchResult(e.target.value)
+    e.target.value.length > 2 &&
     getSearchingProducts({
       variables: {
         "inputText": e.target.value

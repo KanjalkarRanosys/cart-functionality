@@ -4,7 +4,7 @@ import { array, func, shape, string } from 'prop-types';
 
 import { useToasts } from '@magento/peregrine';
 import useDelayedTransition from '@magento/peregrine/lib/hooks/useDelayedTransition';
-import { useApp } from '@magento/peregrine/lib/talons/App/useApp';
+// import { useApp } from '@magento/peregrine/lib/talons/App/useApp';
 
 import globalCSS from '../../index.module.css';
 import { HeadProvider, StoreTitle } from '../Head';
@@ -20,6 +20,7 @@ import {
     CloudOff as CloudOffIcon,
     Wifi as WifiIcon
 } from 'react-feather';
+import { useApp } from './useApp';
 
 const OnlineIcon = <Icon src={WifiIcon} attrs={{ width: 18 }} />;
 const OfflineIcon = <Icon src={CloudOffIcon} attrs={{ width: 18 }} />;
