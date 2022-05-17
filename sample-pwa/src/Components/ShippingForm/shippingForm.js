@@ -4,12 +4,12 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import "./ShippingForm.css"
-import countriesData from '../../../addressData/addressData.json'
+import countriesData from '../../../AddressData/addressData.json'
 import { useHistory } from 'react-router-dom'
 import { fullPageLoadingIndicator } from '../../venia-ui/lib/components/LoadingIndicator'
 import Payment from '../Payment/payment'
-import { GET_REGION, GUEST_ADDRESS } from '../queries/ShippingQueries/shippingQueries'
-import { ITEM_COUNT, PRICE_SUMMARY } from '../queries/CartQueries/cartQueries'
+import { GET_REGION, GUEST_ADDRESS } from '../Queries/ShippingQueries/shippingQueries'
+import { ITEM_COUNT, PRICE_SUMMARY } from '../Queries/CartQueries/cartQueries'
 
 
 const ShippingForm = () => {
@@ -154,6 +154,7 @@ const regions = regionResults && regionResults.data && regionResults.data.countr
                             onChange={(e)=> setAddress({...address, region: e.target.value})}
                             required
                         >
+                        <option value={null} >{regionResults.loading ? "Loading" : "Select State"}</option>
                             {
                                 regions && regions.map((el)=> (
                                     <option value={el.id}>{el.name}</option>

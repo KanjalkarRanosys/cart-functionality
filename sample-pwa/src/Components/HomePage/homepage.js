@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client'
 import React from 'react'
 import { fullPageLoadingIndicator } from '../../venia-ui/lib/components/LoadingIndicator'
-import ProductListing from '../productListing/productListing'
-import { GET_DRESSES } from '../queries/ProductListQueries/productListQueries'
+import ProductListing from '../ProductListing/productListing'
+import { GET_DRESSES } from '../Queries/ProductListQueries/productListQueries'
 import "./HomePage.css"
 
 const Homepage = () => {

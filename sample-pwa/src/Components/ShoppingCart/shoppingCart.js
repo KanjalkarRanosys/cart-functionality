@@ -5,8 +5,8 @@ import { useState } from 'react'
 import "./ShoppingCart.css"
 import { Link } from 'react-router-dom'
 import { fullPageLoadingIndicator } from '../../venia-ui/lib/components/LoadingIndicator'
-import { GET_CART_DETAILS } from '../queries/CartQueries/cartQueries'
-import { DELETE_PRODUCT, UPDATE_QUANTITY } from '../queries/SingleProductQueries/singleProductQueries'
+import { GET_CART_DETAILS } from '../Queries/CartQueries/cartQueries'
+import { DELETE_PRODUCT, UPDATE_QUANTITY } from '../Queries/SingleProductQueries/singleProductQueries'
 
 const ShoppingCart = () => {
 

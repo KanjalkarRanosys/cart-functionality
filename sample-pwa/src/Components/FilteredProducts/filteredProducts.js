@@ -4,8 +4,8 @@ import { useLocation } from 'react-router-dom'
 import { fullPageLoadingIndicator } from '../../venia-ui/lib/components/LoadingIndicator'
 import UseParseParams from '../CustomHooks/useParseParams'
 import NoFilteredProducts from '../NoFilteredProducts/noFilteredProducts'
-import ProductListing from '../productListing/productListing'
-import { GET_FILTERED_PRODUCTS } from '../queries/ProductListQueries/productListQueries'
+import ProductListing from '../ProductListing/productListing'
+import { GET_FILTERED_PRODUCTS } from '../Queries/ProductListQueries/productListQueries'
 
 const FilteredProducts = () => {
 

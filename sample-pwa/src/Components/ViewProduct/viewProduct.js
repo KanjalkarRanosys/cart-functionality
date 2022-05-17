@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fullPageLoadingIndicator } from '../../venia-ui/lib/components/LoadingIndicator';
-import { ADD_PRODUCT_TO_CART } from '../queries/CartQueries/cartQueries';
-import { VIEW_PRODUCT } from '../queries/SingleProductQueries/singleProductQueries';
+import { ADD_PRODUCT_TO_CART } from '../Queries/CartQueries/cartQueries';
+import { VIEW_PRODUCT } from '../Queries/SingleProductQueries/singleProductQueries';
 import './ViewProduct.css';
 
 const ViewProduct = () => {

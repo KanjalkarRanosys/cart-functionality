@@ -8,15 +8,15 @@ import MagentoRoute from '../MagentoRoute';
 // import ProductList from '../ProductList/productList';
 // import ViewProduct from '../ViewProduct/viewProduct';
 // import ShoppingCart from '../ShoppingCart/shoppingCart';
-import ProductList from '../../../../components/ProductList/productList';
-import ViewProduct from '../../../../components/ViewProduct/viewProduct';
-import ShoppingCart from '../../../../components/ShoppingCart/shoppingCart';
-import Homepage from '../../../../components/homePage/homepage';
-import SignIn from '../../../../components/SignIn/signIn';
-import ShippingForm from '../../../../components/ShippingForm/shippingForm';
-import Payment from '../../../../components/Payment/payment';
-import OrderStatus from '../../../../components/OrderStatus/orderStatus';
-import FilteredProducts from '../../../../components/FilteredProducts/filteredProducts';
+import ProductList from '../../../../Components/ProductList/productList';
+import ViewProduct from '../../../../Components/ViewProduct/viewProduct';
+import ShoppingCart from '../../../../Components/ShoppingCart/shoppingCart';
+import Homepage from '../../../../Components/HomePage/homepage';
+import SignIn from '../../../../Components/SignIn/signIn';
+import ShippingForm from '../../../../Components/ShippingForm/shippingForm';
+import Payment from '../../../../Components/Payment/payment';
+import OrderStatus from '../../../../Components/OrderStatus/orderStatus';
+import FilteredProducts from '../../../../Components/FilteredProducts/filteredProducts';
 
 const Routes = () => {
     const { pathname } = useLocation();

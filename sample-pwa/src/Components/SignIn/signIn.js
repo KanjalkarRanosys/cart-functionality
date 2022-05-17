@@ -3,7 +3,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useRef } from 'react'
 import GoogleReCaptcha from '../../venia-ui/lib/components/GoogleReCaptcha'
-import CustomInput from '../input/customInput'
+import CustomInput from '../Input/customInput'
 import "./SignIn.css"
 
 const SignIn = () => {

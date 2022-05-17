@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import CheckOutsideClicked from '../CustomHooks/checkOutsideClicked'
-import { GET_CART_COUNT, GET_CART_DETAILS } from '../queries/CartQueries/cartQueries'
-import { SEARCHING_PRODUCTS } from '../queries/ProductListQueries/productListQueries'
+import { GET_CART_COUNT, GET_CART_DETAILS } from '../Queries/CartQueries/cartQueries'
+import { SEARCHING_PRODUCTS } from '../Queries/ProductListQueries/productListQueries'
 import "./CustomHeader.css"
-import SearchPopup from './searchPopup'
+import SearchPopup from './searchProductPopup'
 
 const CustomHeader = () => {
 
