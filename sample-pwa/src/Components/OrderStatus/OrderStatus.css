@@ -7,14 +7,12 @@
 
 
 .order-status-content {
-    /* background: #36bf67; */
+    background: #ffffff;
     color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* height: 40px; */
-    /* border: 1px solid gray; */
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     color: #000;
     width: 50%;

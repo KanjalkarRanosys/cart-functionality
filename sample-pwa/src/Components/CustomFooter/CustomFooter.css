@@ -1,14 +1,16 @@
 .custom-footer {
     display: flex;
     flex-direction: column;
-    background-color: #fff;
+    background-color: #172337;
     font-family: 'Noto Sans';
+    color: #fff;
 }
 
 .custom-footer button {
     /* padding: 10px 80px; */
     height: 40px;
     font-weight: 700;
+    color: #878787;
 }
 
 .footer-options {

@@ -14,20 +14,20 @@ const Homepage = () => {
   return (
     <div>
     {loading ? <div>{fullPageLoadingIndicator}</div>:
-    <>
+    <div>
       <div className='home-banner'>
         <div className='home-banner-content'>
-          <h1 className='home-banner-content-heading'>Where does it come from?</h1>
+          {/* <h1 className='home-banner-content-heading'>Where does it come from?</h1>
           <p className='home-banner-content-details'>
             We are a global digital consulting company, 
             Contrary to popular belief, Lorem Ipsum is not simply random text. 
             It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
           </p>
-          <button className='home-banner-button'>SHOP NOW</button>
+          <button className='home-banner-button'>SHOP NOW</button> */}
         </div>
       </div>
       <ProductListing data={data} componentName="TOP PRODUCTS" />
-      </>
+      </div>
     }
     </div>
   )

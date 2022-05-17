@@ -15,7 +15,9 @@ const ProductList = () => {
   return (
     <div className='product-list'>
       {loading ? <div>{fullPageLoadingIndicator}</div>:
+      <div>
         <ProductListing data={data} componentName="PRODUCT LIST" />
+      </div>
       }
     </div>
   )

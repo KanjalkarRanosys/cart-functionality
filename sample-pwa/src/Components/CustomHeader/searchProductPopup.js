@@ -8,7 +8,8 @@ const SearchPopup = ({
     handleClose,
     handleSearchProducts,
     filteredSearchProducts,
-    searchingProducts
+    searchingProducts,
+    inputValue
 }) => {
     if (!open) {
         return null;
@@ -38,9 +39,10 @@ const SearchPopup = ({
                                 onChange={e => {
                                     handleSearchProducts(e);
                                 }}
+                                value={inputValue}
                             />
                         </div>
-                        {searchingProducts && !searchingProducts.loading ?
+                        {searchingProducts && !searchingProducts.loading &&
                         <div className="searching-list">
                             {searchingResults &&
                                 searchingResults.items &&
@@ -64,7 +66,9 @@ const SearchPopup = ({
                                         </div>
                                     </div>
                                 ))}
-                        </div> : <div>Loading...</div>}
+                        </div> 
+                        // : <div>Loading...</div>
+                        }
                     </div>
                 </div>
             </form>

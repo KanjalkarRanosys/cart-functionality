@@ -1,14 +1,18 @@
 .product-list {
     display: flex;
     flex-wrap: wrap;
-    background-color: #ebebeb;
+    background-color: #ffffff;
 }
 
 .row-product {
     list-style: none;
-    flex-basis: 0 0 33.33333%;
-    width: 33.3333%;
+    flex-basis: 0 0 0 25%;
+    width: 25%;
     padding: 30px;
+}
+
+.row-product:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .row-product-img {

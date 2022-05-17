@@ -19,6 +19,7 @@ const CustomHeader = () => {
   const [isSearchBox, setIsSearchBox] = useState(false)
   const [isSearchingResults, setIsSearchingResults]= useState()
   const[open, setOpen]= useState(false)
+  const [inputValue, setInputValue] = useState()
 
   const {data} = useQuery(GET_CART_COUNT, {
     variables: {
@@ -41,10 +42,16 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
 
   const handleSearchProducts = (e) => {
     setSearchResult(e.target.value)
-    e.target.value.length > 2 &&
+    setInputValue(e.target.value)
+    e.target.value.length !== 0 ?
     getSearchingProducts({
       variables: {
         "inputText": e.target.value
+      }
+    }) :
+    getSearchingProducts({
+      variables: {
+        "inputText": null
       }
     })
   }
@@ -88,6 +95,7 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
           handleSearchProducts={handleSearchProducts} 
           filteredSearchProducts={filteredSearchProducts}
           searchingProducts={searchingProducts}
+          inputValue={inputValue}
         />
       </CheckOutsideClicked>
 
@@ -108,7 +116,8 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
             <span 
               onClick={handleOpenPopup} 
               className='search-header'>
-              <span className='search-icon'><img src='https://cdn1.iconfinder.com/data/icons/hawcons/32/698956-icon-111-search-512.png' /></span>
+              <span className='search-icon'>
+                <img src='data:image/webp;base64,UklGRnQDAABXRUJQVlA4WAoAAAAQAAAA4AAA4AAAQUxQSCsCAAARDzD/ERFCdiTJbViRJW8RAkKBMiMykUJhKAwBnzIsXhWB29t93vxE9N+B20iKlN09HOhJD/xh+udyNcsCq5nd8OwnhaZavy7o/zv83/vAwmLjNfO1ja/cHJn+R/njcBhvlze8Am7IkkrBd0AhayoVD4CxSeMTV8d2drKpdWyvkk1tvUvXYyL0ukhXTvC7F9AFU3oXEAClN4NxxXqBnJUSDLTWDuMeDeyCcL8gJTcExcs8IRKTYAhEYm588BwXyEkmsjYjisB0QqQUZnCJWXAMcb4LHto3BWtrccax8C2kytzg5F/osHFUmZuAYOwhm0wkW+H4prRgduwq+cehQN4JlJf36OVHIn9Lyh8BP9BskGfgN527P8l6WcTV/YNglsSNSkTZ/0TEPVdH3udppY0hY77bkbXLJ6F0hsqnr3Zu54iGsrFy3KDEpIgNhdkGwrlS0LBvCBZk8yKiGhBskDiUejIz3PiB2RRynBV9zSVm97HsFO9+iEbRTtKQhfhnF0wZvkfVgBx7mN7MKL/V0EXkbQpIsWBMjgVjSiwY8MoYbqgQY3hFrRyE4QqY+zTjKw4TlC5YOokumDqZLnjRKRObuHNg3CT0SXmnp9LZvpuN5Nd55IKbv8X5uompLtJtmEnENQ5xxTOJ66aQMGuGyr3A3gWzOMEkXjCJF8zxv1xw1gQnTfCNwHv3KwmeBbaeU0XwolC7XkVwljiSxH4j8X4h0WaJbZJ4mf6lXBMAVlA4ICIBAADQHQCdASrhAOEAPpFCm0mlo6KhKn+IALASCWlu4XPeABnZ18/oB/APwA/QD8/e/wXWZmZmZmZmZctuypy+E1lfia70O7u7ttt3VYlZoNBhG2pBVYu7rHugpP/1cQ7NJl0ab2jVKe6Zqqprq9R8SnFMnfChmZlLTozMcTN3d3Dt+TSqfknKQN///Jco02Gi8TjHEC7BywMGsKqqmUlzidOgdBl09FS0YCJNIiGDzx/++Xh6aoa+K57OrNA2/RmZmZmY69zRpvapci1i4xVVVVVUTZU4nTmvso8b293d3d3cUNHr6YPcKaZmZmZmZT9pFVVVVVVVVVPAAP70MiN2e4eNZ93eqiqiMNpL9G/yiaGTXra8L1Uf/vGQJr7xkAAPGHQAAA==' /></span>
               <span>Search</span>
             </span>
           </div>

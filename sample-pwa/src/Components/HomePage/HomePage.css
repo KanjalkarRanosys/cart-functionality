@@ -3,20 +3,22 @@
     border-style: none;
     border-image: initial;
     border-radius: 0px;
-    background-image: url(https://jnz3dtiuj77ca.dummycachetest.com/media/catalog/category/venia-hero1.jpg?auto=webp&format=pjpg&quality=85);
+    background-image: url(https://rukminim2.flixcart.com/flap/3376/560/image/02b803d1586f6fe9.jpg?q=50);
     /* background-size: contain;
     background-position: left top; */
     background-repeat: no-repeat;
-    min-height: 660px;
+    min-height: 212px;
     position: relative;
     display: flex;
     align-items: center;
+    background-size: 100%;
 }
 
 .home-banner-content {
     position: absolute;
     width: 50%;
     padding-left: 50px;
+    color: #fff;
 }
 
 .home-banner-content-heading {
