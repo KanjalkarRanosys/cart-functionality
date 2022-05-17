@@ -3,8 +3,7 @@ module.exports = (targets) => {
       routes.push({
         name: "MyGreetingRoute",
         pattern: "/products",
-        path: require.resolve("../components/Products/products.js"),
-        // path: require.resolve("../../node_modules/@magento/venia-ui/lib/components/ProductOptions"),
+        path: require.resolve("../Components/Products/products.js"),
       });
       return routes;
     });

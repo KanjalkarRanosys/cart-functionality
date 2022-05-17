@@ -139,7 +139,7 @@
   "keywords": [],
   "pwa-studio": {
     "targets": {
-      "intercept": "src/targets/local-intercept"
+      "intercept": "src/Targets/local-intercept"
     }
   }
 }
