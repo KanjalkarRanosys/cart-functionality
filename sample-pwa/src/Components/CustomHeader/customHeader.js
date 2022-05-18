@@ -43,15 +43,10 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
   const handleSearchProducts = (e) => {
     setSearchResult(e.target.value)
     setInputValue(e.target.value)
-    e.target.value.length !== 0 ?
+    e.target.value.length > 2 &&
     getSearchingProducts({
       variables: {
         "inputText": e.target.value
-      }
-    }) :
-    getSearchingProducts({
-      variables: {
-        "inputText": null
       }
     })
   }
@@ -68,6 +63,12 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
 
   const handleClosePopup = ()=>{
     setOpen(false)
+    setInputValue()
+    getSearchingProducts({
+      variables: {
+        "inputText": null
+      }
+    })
   }
 
   const handleOpenPopup = () => {
