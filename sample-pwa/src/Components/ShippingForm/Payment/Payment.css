@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-around;
     padding: 30px 0;
+    width: 100%;
 }
 
 .payment-form {
@@ -64,6 +65,10 @@
     border-radius: 5px;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    width: 100%;
-    margin-left: 130px;
+    width: 60%;
+    /* margin-left: 130px; */
+}
+
+.reduce-width-60 {
+    width: 60% !important;
 }

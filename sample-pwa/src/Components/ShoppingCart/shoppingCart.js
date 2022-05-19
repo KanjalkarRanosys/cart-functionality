@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom'
 import { fullPageLoadingIndicator } from '../../venia-ui/lib/components/LoadingIndicator'
 import { GET_CART_DETAILS } from '../Queries/CartQueries/cartQueries'
 import { DELETE_PRODUCT, UPDATE_QUANTITY } from '../Queries/SingleProductQueries/singleProductQueries'
+import { useLegacyMiniCart } from '@magento/peregrine/lib/talons/LegacyMiniCart/useLegacyMiniCart'
+import { useCheckoutPage } from '@magento/peregrine/lib/talons/CheckoutPage/useCheckoutPage'
+import ShippingBill from '../ShippingForm/ShippingBill/shippingBill'
 
 const ShoppingCart = () => {
 
@@ -41,7 +44,8 @@ const [updateQuantity, {loading}] = useMutation(UPDATE_QUANTITY, {
   }
 })
 
-console.log(cartIDDetails);
+console.log(useLegacyMiniCart());
+console.log("useCheckoutPage", useCheckoutPage());
 
 const subTotal = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart && cartIDDetails.data.cart.prices.subtotal_excluding_tax.value
 const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart && cartIDDetails.data.cart.total_quantity
@@ -109,17 +113,7 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
         </div> : <span> There are no items in your cart</span>
       }
     <div className='cart-price'>
-      <div className='cart-total-quantity'>
-        <div className='desc-quantity-total'>
-            <span className='desc-key'>Sub-Total: </span>
-            <span className='desc-value'>{subTotal}</span>
-        </div>
-        <br />
-        <div className='desc-quantity-total'>
-          <span className='desc-key'>Total Quantity: </span>
-          <span className='desc-value'>{quantity}</span>
-        </div>
-      </div>
+      <ShippingBill subTotal={subTotal} quantity={quantity} />
 
       <div className='checkout-button'>
         <Link to='/checkout'>

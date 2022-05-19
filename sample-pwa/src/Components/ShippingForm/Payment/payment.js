@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import ShippingBill from '../ShippingBill/shippingBill'
 import "./Payment.css"
 
 const Payment = (props) => {
@@ -19,7 +20,7 @@ const Payment = (props) => {
     }
 
   return (
-    <div>
+    <div className='reduce-width-60' >
         <div className='payment'>
             <div className='payment-form'>
                 <form onSubmit={handleSubmit} >
@@ -49,19 +50,8 @@ const Payment = (props) => {
                     </div>
                 </form>
             </div>
-            <div className='cart-price'>
-                <div className='cart-total-quantity'>
-                        <div className='desc-quantity-total'>
-                            <span className='desc-key'>Sub-Total: </span>
-                            <span className='desc-value'>{props.subTotal}</span>
-                        </div>
-                    <br />
-                    <br />
-                    <div className='desc-quantity-total'>
-                        <span className='desc-key'>Total: </span>
-                        <span className='desc-value'>{props.total}</span>
-                    </div>
-                </div>
+            <div className='cart-price reduce-width-60'>
+                <ShippingBill total= {props.total} subTotal={props.subTotal} cartId={props.cartId} />
             </div>
         </div>
     </div>

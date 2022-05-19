@@ -16,8 +16,6 @@ const CustomHeader = () => {
 
   const history = useHistory()
 
-  const [isSearchBox, setIsSearchBox] = useState(false)
-  const [isSearchingResults, setIsSearchingResults]= useState()
   const[open, setOpen]= useState(false)
   const [inputValue, setInputValue] = useState()
 
@@ -51,14 +49,6 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
     })
   }
 
-  console.log(isSearchBox);
-
-  console.log(searchingProducts);
-
-  const [searchingData, setSearchingData] = useState()
-
-  // !isSearchBox && searchingResults
-
   const searchingResults = searchingProducts && searchingProducts.data && searchingProducts.data.products && searchingProducts.data.products
 
   const handleClosePopup = ()=>{
@@ -85,7 +75,6 @@ const quantity = cartIDDetails && cartIDDetails.data && cartIDDetails.data.cart 
     await setOpen(false)
   }
 
-  console.log(searchingResults);
   return (
     <div className='custom-header' >
       <CheckOutsideClicked onClickOutside={handleClosePopup}>

@@ -14,7 +14,7 @@ import ShoppingCart from '../../../../Components/ShoppingCart/shoppingCart';
 import Homepage from '../../../../Components/HomePage/homepage';
 import SignIn from '../../../../Components/SignIn/signIn';
 import ShippingForm from '../../../../Components/ShippingForm/shippingForm';
-import Payment from '../../../../Components/Payment/payment';
+import Payment from '../../../../Components/ShippingForm/Payment/payment';
 import OrderStatus from '../../../../Components/OrderStatus/orderStatus';
 import FilteredProducts from '../../../../Components/FilteredProducts/filteredProducts';
 

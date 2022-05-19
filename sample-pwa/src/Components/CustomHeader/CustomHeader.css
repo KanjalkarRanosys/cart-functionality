@@ -60,6 +60,16 @@
     display: flex;
     flex-direction: column;
     width: 20%;
+
+    /* border: 1px solid gray;
+    padding: 10px;
+    background: #fff;
+    border-radius: 5px;
+    height: auto;
+    box-shadow: #694ae359 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    width: 20%; */
 }
 
 .search-icon img{

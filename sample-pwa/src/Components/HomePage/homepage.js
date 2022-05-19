@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client'
+import { useLegacyMiniCart } from '@magento/peregrine/lib/talons/LegacyMiniCart/useLegacyMiniCart'
 import React from 'react'
 import { fullPageLoadingIndicator } from '../../venia-ui/lib/components/LoadingIndicator'
 import ProductListing from '../ProductListing/productListing'
@@ -6,6 +7,8 @@ import { GET_DRESSES } from '../Queries/ProductListQueries/productListQueries'
 import "./HomePage.css"
 
 const Homepage = () => {
+
+  console.log(useLegacyMiniCart());
 
     const {data, loading} = useQuery(GET_DRESSES, {
         variables: {"currentPage":1,"id":"MzY=","filters":{"category_uid":{"eq":"MzY="}},"pageSize":12,"sort":{"position":"ASC"}}

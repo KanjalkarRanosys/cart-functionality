@@ -1,10 +1,11 @@
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import React from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fullPageLoadingIndicator } from '../../venia-ui/lib/components/LoadingIndicator';
-import { ADD_PRODUCT_TO_CART } from '../Queries/CartQueries/cartQueries';
+import AddToCart from '../AddToCart/addToCart';
+import UseQuantityCounter from '../CustomHooks/useQuantityCounter';
 import { VIEW_PRODUCT } from '../Queries/SingleProductQueries/singleProductQueries';
 import './ViewProduct.css';
 
@@ -13,54 +14,34 @@ const ViewProduct = () => {
 
     const urlKey = params.name.replace(/ /g, '-').toLowerCase();
 
+
     const { data, loading } = useQuery(VIEW_PRODUCT, {
         variables: { urlKey: urlKey }
     });
-
-    console.log(data);
 
     const [selectedSize, setSelectedSize] = useState(false);
     const [selectedColor, setSelectedColor] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const [selected_options, setSelectedOptions] = useState([]);
+    const [isLoading, setIsLoading] = useState(false)
+
     const storeDetails = useSelector(state => state);
     const cartId = storeDetails.cart.cartId;
-    const [isColor, setIsColor] = useState(false);
-    const [isSize, setIsSize] = useState(false);
-
-    const itemValues =
-        data &&
-        data.products &&
-        data.products.items.map(
-            el =>
-                el.configurable_options &&
-                el.configurable_options.map(el4 => el4.uid)
-        );
 
     const skuGet =
         data && data.products && data.products.items.find(el => (
             urlKey === el.url_key
         ));
     const skuValue = skuGet && skuGet.sku + '';
-    // const configurable_options = itemValues && itemValues.map((e)=> e)
 
-    const [addToCart, { loading: addToCartLoader }] = useMutation(
-        ADD_PRODUCT_TO_CART,
-        {
-            variables: {
-                cartId: cartId,
-                cartItem: {
-                    quantity: quantity,
-                    selected_options: selected_options,
-                    sku: skuValue
-                }
-            }
-        }
-    );
+    // called custom hook for update quantity
+    const [increament, decreament, count] = UseQuantityCounter(quantity)
+
+    console.log(increament, decreament, count);
 
     return (
         <div className="view-product-details">
-            {addToCartLoader | loading ? (
+            {loading ? (
                 <div>{fullPageLoadingIndicator}</div>
             ) : (
                 <>
@@ -173,7 +154,7 @@ const ViewProduct = () => {
                                                                 'fashion_size' && (
                                                                 <div className="detail-text">
                                                                     Fashion
-                                                                    Color:
+                                                                    Size:
                                                                 </div>
                                                             )
                                                     )}
@@ -242,38 +223,42 @@ const ViewProduct = () => {
                                             <div className="grp-column">
                                                 <button
                                                     className={
-                                                        quantity == 1
+                                                        count == 1
                                                             ? 'disableQuantityUpdate'
                                                             : 'quantityButton'
                                                     }
-                                                    onClick={() => {
-                                                        quantity > 1
-                                                            ? setQuantity(
-                                                                  quantity - 1
-                                                              )
-                                                            : null;
-                                                    }}
+                                                    onClick={decreament}
                                                 >
                                                     -
                                                 </button>
                                                 <div className="quantity-text">
-                                                    {quantity}
+                                                    {count}
                                                 </div>
                                                 <button
                                                     className="quantityButton"
-                                                    onClick={() =>
-                                                        setQuantity(
-                                                            quantity + 1
-                                                        )
-                                                    }
-                                                >
+                                                    onClick={increament}
+                                                >   
                                                     +
                                                 </button>
                                             </div>
                                         </div>
-                                        {/* <div className='divider' /> */}
-                                        <button
-                                            // disabled={!isColor && true}
+                                        <AddToCart 
+                                            typename={el.__typename}
+                                            selectedColor={selectedColor}
+                                            selectedSize={selectedSize}
+                                            urlKey={urlKey}
+                                            cartId={cartId}
+                                            quantity={count}
+                                            skuValue={skuValue}
+                                            selected_options={selected_options}
+                                            setSelectedColor={setSelectedColor}
+                                            setSelectedSize={setSelectedSize}
+                                            setSelectedOptions={setSelectedOptions}
+                                            setIsLoading={setIsLoading}
+                                            isLoading={isLoading}
+                                            el={el}
+                                        />
+                                        {/* <button
                                             disabled={
                                                 el.__typename ==
                                                 'ConfigurableProduct'
@@ -312,7 +297,7 @@ const ViewProduct = () => {
                                             }}
                                         >
                                             Add To Cart
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </div>
                                 <div className="divider" />
