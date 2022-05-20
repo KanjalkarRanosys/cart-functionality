@@ -17,6 +17,8 @@ import ShippingForm from '../../../../Components/ShippingForm/shippingForm';
 import Payment from '../../../../Components/ShippingForm/Payment/payment';
 import OrderStatus from '../../../../Components/OrderStatus/orderStatus';
 import FilteredProducts from '../../../../Components/FilteredProducts/filteredProducts';
+import LandingPage from '../../../../Components/LandingPage/landingPage';
+// import LandingPage from '../../../../Components/LandingPage/landingPage';
 
 const Routes = () => {
     const { pathname } = useLocation();
@@ -64,6 +66,10 @@ const Routes = () => {
                     
                     <Route path="/filtered-products">
                         <FilteredProducts />
+                    </Route>
+
+                    <Route path="/landing-page">
+                        <LandingPage />
                     </Route>
                     
                  </Route>
